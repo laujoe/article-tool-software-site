@@ -1,362 +1,398 @@
 ---
-import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
-import Button from '~/components/ui/Button.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: '文稿工作台 - 面向内容团队的文章生产软件',
-  description: '从选题、写作、审校到发布排期，把文章生产流程收进一个清晰的软件工作台。',
+  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  ignoreTitleTemplate: true,
 };
-
-const featureItems = [
-  {
-    icon: 'tabler:route',
-    title: '选题到大纲',
-    description: '把灵感、关键词、参考资料统一整理成可执行的大纲，让每篇文章都有清楚的起点。',
-  },
-  {
-    icon: 'tabler:edit-circle',
-    title: '沉浸写作',
-    description: '段落、引用、标题层级和待办清单同屏处理，适合长文、产品稿和知识库内容。',
-  },
-  {
-    icon: 'tabler:checks',
-    title: '审校流程',
-    description: '用状态、批注和版本记录串起作者、编辑、审核人，减少反复传文件的混乱。',
-  },
-  {
-    icon: 'tabler:calendar-stats',
-    title: '发布排期',
-    description: '按栏目、渠道和负责人规划内容日历，随时看到本周要交付的文章和风险。',
-  },
-  {
-    icon: 'tabler:chart-line',
-    title: '效果复盘',
-    description: '沉淀阅读、转化、更新时间和关键词表现，帮助下一轮选题更有依据。',
-  },
-  {
-    icon: 'tabler:shield-check',
-    title: '团队资产库',
-    description: '把可复用的标题公式、品牌语气、案例素材和发布规范集中管理。',
-  },
-];
-
-const workflowItems = [
-  ['01', '收集线索', '导入灵感、竞品链接、关键词和用户问题。'],
-  ['02', '生成计划', '拆成文章卡片、负责人、截止日期和发布渠道。'],
-  ['03', '协作定稿', '围绕同一篇文章完成写作、审校、排期和复盘。'],
-];
-
-const pricingItems = [
-  {
-    title: '个人版',
-    price: '免费',
-    description: '适合个人作者和刚开始整理内容流程的创作者。',
-    items: ['20 篇文章草稿', '基础标签与搜索', 'Markdown 导出'],
-  },
-  {
-    title: '团队版',
-    price: '¥99/月',
-    description: '适合小团队持续做公众号、博客、SEO 和产品内容。',
-    items: ['无限文章项目', '多人协作与审校', '内容日历', '素材资产库'],
-    highlighted: true,
-  },
-  {
-    title: '企业版',
-    price: '定制',
-    description: '适合需要权限、规范、私有化或深度集成的内容团队。',
-    items: ['角色权限', '品牌规范库', '数据看板', '专属部署支持'],
-  },
-];
 ---
 
 <Layout metadata={metadata}>
-  <Fragment slot="announcement"></Fragment>
+  <!-- Hero Widget ******************* -->
 
-  <section class="relative overflow-hidden border-b border-gray-200 bg-white dark:border-slate-800 dark:bg-slate-950">
-    <div class="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(90deg,#0f766e,#2563eb,#d97706)] opacity-10"></div>
-    <div
-      class="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1fr_0.9fr] md:items-center md:py-24"
-    >
-      <div>
-        <p
-          class="mb-4 inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-sm font-semibold text-teal-800 dark:border-teal-800 dark:bg-teal-950 dark:text-teal-200"
-        >
-          <Icon name="tabler:sparkles" class="h-4 w-4" />
-          内容团队的文章生产中枢
-        </p>
-        <h1
-          class="max-w-4xl text-4xl font-bold leading-tight tracking-normal text-gray-950 dark:text-white sm:text-5xl md:text-6xl"
-        >
-          把选题、写作、审校和发布排期放进一个工作台
-        </h1>
-        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-          文稿工作台帮助内容团队摆脱表格、聊天记录和散落文档。每篇文章从灵感到复盘都有状态、有负责人、有上下文。
-        </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Button variant="primary" href="#pricing" text="查看方案" icon="tabler:arrow-right" class="justify-center" />
-          <Button href="#features" text="了解功能" icon="tabler:layout-dashboard" class="justify-center" />
-        </div>
-        <div class="mt-8 grid max-w-xl grid-cols-3 gap-4 text-sm text-slate-500 dark:text-slate-400">
-          <div>
-            <strong class="block text-2xl text-gray-950 dark:text-white">4步</strong>
-            内容闭环
-          </div>
-          <div>
-            <strong class="block text-2xl text-gray-950 dark:text-white">12+</strong>
-            状态字段
-          </div>
-          <div>
-            <strong class="block text-2xl text-gray-950 dark:text-white">0丢失</strong>
-            素材沉淀
-          </div>
-        </div>
-      </div>
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get template',
+        href: 'https://github.com/arthelokyo/astrowind',
+        target: '_blank',
+        icon: 'tabler:download',
+      },
+      { text: 'Learn more', href: '#features' },
+    ]}
+    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
+  >
+    <Fragment slot="title">
+      Free template for <span class="hidden xl:inline">creating websites with</span>
+      <span class="text-accent dark:text-white"> Astro v6</span> + Tailwind CSS
+    </Fragment>
 
-      <div class="relative">
-        <div
-          class="rounded-lg border border-slate-200 bg-slate-950 p-3 shadow-2xl shadow-slate-300/40 dark:border-slate-700 dark:shadow-none"
-        >
-          <div class="flex items-center gap-2 border-b border-slate-800 pb-3">
-            <span class="h-3 w-3 rounded-full bg-red-400"></span>
-            <span class="h-3 w-3 rounded-full bg-amber-300"></span>
-            <span class="h-3 w-3 rounded-full bg-emerald-400"></span>
-            <span class="ml-3 text-xs font-medium text-slate-400">articleflow.app/workspace</span>
-          </div>
-          <div class="grid gap-3 pt-3 md:grid-cols-[0.8fr_1.2fr]">
-            <aside class="rounded-md bg-slate-900 p-4">
-              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">内容日历</p>
-              <div class="mt-4 space-y-3">
-                {
-                  ['产品发布稿', 'SEO 长文', '用户案例', '公众号选题'].map((item, index) => (
-                    <div class="rounded-md border border-slate-800 bg-slate-950 p-3">
-                      <div class="flex items-center justify-between gap-3">
-                        <span class="text-sm font-semibold text-slate-100">{item}</span>
-                        <span
-                          class:list={[
-                            'h-2.5 w-2.5 rounded-full',
-                            index === 0
-                              ? 'bg-teal-400'
-                              : index === 1
-                                ? 'bg-blue-400'
-                                : index === 2
-                                  ? 'bg-amber-300'
-                                  : 'bg-pink-400',
-                          ]}
-                        />
-                      </div>
-                      <div class="mt-2 h-1.5 rounded-full bg-slate-800">
-                        <div
-                          class:list={[
-                            'h-1.5 rounded-full',
-                            index === 0
-                              ? 'w-4/5 bg-teal-400'
-                              : index === 1
-                                ? 'w-3/5 bg-blue-400'
-                                : index === 2
-                                  ? 'w-2/5 bg-amber-300'
-                                  : 'w-1/2 bg-pink-400',
-                          ]}
-                        />
-                      </div>
-                    </div>
-                  ))
-                }
-              </div>
-            </aside>
-            <main class="rounded-md bg-white p-4 text-slate-950">
-              <div class="flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">当前文稿</p>
-                  <h2 class="mt-1 text-xl font-bold">AI 写作工具年度指南</h2>
-                </div>
-                <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">审校中</span>
-              </div>
-              <div class="mt-5 grid gap-3 sm:grid-cols-3">
-                {
-                  ['大纲', '初稿', '发布'].map((item, index) => (
-                    <div class="rounded-md border border-slate-200 p-3">
-                      <Icon
-                        name={index === 0 ? 'tabler:list-details' : index === 1 ? 'tabler:pencil' : 'tabler:send'}
-                        class="h-5 w-5 text-blue-600"
-                      />
-                      <p class="mt-2 text-sm font-semibold">{item}</p>
-                      <p class="mt-1 text-xs text-slate-500">
-                        {index === 0 ? '已确认' : index === 1 ? '待润色' : '周五 10:00'}
-                      </p>
-                    </div>
-                  ))
-                }
-              </div>
-              <div class="mt-5 rounded-md bg-slate-50 p-4">
-                <p class="text-sm font-semibold">编辑建议</p>
-                <p class="mt-2 text-sm leading-6 text-slate-600">
-                  第三段可以补一个真实业务场景；标题建议保留“年度指南”，副标题强调“选型清单”。
-                </p>
-              </div>
-              <div
-                class="mt-5 h-28 rounded-md border border-dashed border-slate-300 bg-[linear-gradient(135deg,#f8fafc_25%,#eef2ff_25%,#eef2ff_50%,#f8fafc_50%,#f8fafc_75%,#eef2ff_75%)] bg-[length:24px_24px]"
-              >
-              </div>
-            </main>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="features" class="bg-slate-50 py-16 dark:bg-slate-900 md:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="max-w-3xl">
-        <p class="text-sm font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">核心功能</p>
-        <h2 class="mt-3 text-3xl font-bold tracking-normal text-gray-950 dark:text-white sm:text-4xl">
-          为持续产出内容而设计，不只是一个写字工具
-        </h2>
-      </div>
-      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {
-          featureItems.map((item) => (
-            <article class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-950">
-              <Icon name={item.icon} class="h-9 w-9 text-teal-700 dark:text-teal-300" />
-              <h3 class="mt-5 text-xl font-bold text-gray-950 dark:text-white">{item.title}</h3>
-              <p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">{item.description}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section id="workflow" class="bg-white py-16 dark:bg-slate-950 md:py-24">
-    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-      <div>
-        <p class="text-sm font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300">工作流</p>
-        <h2 class="mt-3 text-3xl font-bold tracking-normal text-gray-950 dark:text-white sm:text-4xl">
-          从灵感到上线，每一步都能追踪
-        </h2>
-        <p class="mt-5 leading-8 text-slate-600 dark:text-slate-300">
-          适合软件公司、知识付费团队、独立创作者和内容运营团队，把内容生产变成可复用的流程，而不是每次重新开始。
-        </p>
-      </div>
-      <div class="grid gap-4">
-        {
-          workflowItems.map(([step, title, description]) => (
-            <div class="grid gap-4 rounded-lg border border-gray-200 p-5 dark:border-slate-700 sm:grid-cols-[88px_1fr]">
-              <div class="text-3xl font-black text-blue-700 dark:text-blue-300">{step}</div>
-              <div>
-                <h3 class="text-xl font-bold text-gray-950 dark:text-white">{title}</h3>
-                <p class="mt-2 leading-7 text-slate-600 dark:text-slate-300">{description}</p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing" class="bg-slate-50 py-16 dark:bg-slate-900 md:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="mx-auto max-w-3xl text-center">
-        <p class="text-sm font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300">方案</p>
-        <h2 class="mt-3 text-3xl font-bold tracking-normal text-gray-950 dark:text-white sm:text-4xl">
-          先跑通流程，再逐步扩大团队协作
-        </h2>
-      </div>
-      <div class="mt-10 grid gap-5 lg:grid-cols-3">
-        {
-          pricingItems.map((plan) => (
-            <article
-              class:list={[
-                'relative rounded-lg border bg-white p-6 shadow-sm dark:bg-slate-950',
-                plan.highlighted
-                  ? 'border-blue-500 shadow-blue-100 dark:border-blue-400 dark:shadow-none'
-                  : 'border-gray-200 dark:border-slate-700',
-              ]}
-            >
-              {plan.highlighted && (
-                <span class="absolute right-4 top-4 rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white">
-                  推荐
-                </span>
-              )}
-              <h3 class="text-xl font-bold text-gray-950 dark:text-white">{plan.title}</h3>
-              <p class="mt-3 min-h-14 leading-7 text-slate-600 dark:text-slate-300">{plan.description}</p>
-              <div class="mt-6 text-3xl font-black text-gray-950 dark:text-white">{plan.price}</div>
-              <ul class="mt-6 space-y-3">
-                {plan.items.map((item) => (
-                  <li class="flex gap-3 text-slate-700 dark:text-slate-300">
-                    <Icon name="tabler:check" class="mt-0.5 h-5 w-5 shrink-0 text-teal-600 dark:text-teal-300" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" class="bg-white py-16 dark:bg-slate-950 md:py-24">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6">
-      <div class="text-center">
-        <p class="text-sm font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">FAQ</p>
-        <h2 class="mt-3 text-3xl font-bold tracking-normal text-gray-950 dark:text-white sm:text-4xl">常见问题</h2>
-      </div>
-      <div
-        class="mt-10 divide-y divide-gray-200 rounded-lg border border-gray-200 dark:divide-slate-800 dark:border-slate-700"
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro v6 +
+        Tailwind CSS v4.</span
       >
-        <details class="group p-5" open>
-          <summary
-            class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-gray-950 dark:text-white"
-          >
-            可以继续保留博客吗？
-            <Icon name="tabler:chevron-down" class="h-5 w-5 transition group-open:rotate-180" />
-          </summary>
-          <p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">
-            可以。博客仍然在 `/blog`，已有文章也先保留。后续只需要替换 `src/data/post` 里的文章即可。
-          </p>
-        </details>
-        <details class="group p-5">
-          <summary
-            class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-gray-950 dark:text-white"
-          >
-            原来的页面文件会被删除吗？
-            <Icon name="tabler:chevron-down" class="h-5 w-5 transition group-open:rotate-180" />
-          </summary>
-          <p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">
-            不会。这一版只是调整首页、导航和品牌文案，其他页面文件仍然保留，方便以后参考或二次开发。
-          </p>
-        </details>
-        <details class="group p-5">
-          <summary
-            class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-gray-950 dark:text-white"
-          >
-            文案和产品名能换成真实的吗？
-            <Icon name="tabler:chevron-down" class="h-5 w-5 transition group-open:rotate-180" />
-          </summary>
-          <p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">
-            能。你给我软件名称、目标用户、三到五个核心功能和联系方式，我可以把这一版改成正式上线文案。
-          </p>
-        </details>
-      </div>
-    </div>
-  </section>
+      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
+      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages & Blogs.
+    </Fragment>
+  </Hero>
 
-  <section id="contact" class="bg-slate-950 py-16 text-white md:py-24">
-    <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 md:grid-cols-[1fr_auto] md:items-center">
-      <div>
-        <p class="text-sm font-bold uppercase tracking-wider text-teal-300">准备上线</p>
-        <h2 class="mt-3 max-w-3xl text-3xl font-bold tracking-normal sm:text-4xl">
-          用一个清晰的软件宣传页，承接产品介绍、试用申请和内容营销
-        </h2>
-      </div>
-      <Button
-        variant="primary"
-        href="mailto:hello@example.com"
-        text="联系咨询"
-        icon="tabler:mail"
-        class="justify-center"
-      />
-    </div>
-  </section>
+  <!-- Note Widget ******************* -->
+
+  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="features"
+    tagline="Features"
+    title="What you get with AstroWind"
+    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023, 2024 and 2025."
+    items={[
+      {
+        title: 'Astro + Tailwind CSS Integration',
+        description:
+          'A seamless integration between two great frameworks that offer high productivity, performance and versatility. Now powered by Tailwind CSS v4.',
+        icon: 'tabler:brand-tailwind',
+      },
+      {
+        title: 'Ready-to-use Components',
+        description:
+          'Widgets made with Tailwind CSS v4 ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
+        icon: 'tabler:components',
+      },
+      {
+        title: 'Best Practices',
+        description:
+          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
+        icon: 'tabler:list-check',
+      },
+      {
+        title: 'Excellent Page Speed',
+        description:
+          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Search Engine Optimization (SEO)',
+        description:
+          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
+        icon: 'tabler:arrows-right-left',
+      },
+      {
+        title: 'Open to new ideas and contributions',
+        description:
+          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
+        icon: 'tabler:bulb',
+      },
+    ]}
+  />
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    tagline="Inside template"
+    title="AstroWind's Blueprint: Fun Meets Functionality!"
+    items={[
+      {
+        title: 'Built on top of Astro v6',
+        description:
+          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
+      },
+      {
+        title: 'Styled using Tailwind CSS v4',
+        description:
+          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
+      },
+      {
+        title: 'Cross-browser compatibility',
+        description:
+          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Colorful Image',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
+      Gain a competitive advantage by incorporating industry leading practices
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'High level of customization',
+        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
+      },
+      {
+        title: 'Multiple layout possibilities',
+        description:
+          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
+      },
+      {
+        title: 'Fully responsive design',
+        description:
+          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
+      },
+      {
+        title: 'Integration of media',
+        description:
+          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
+      alt: 'Blueprint Image',
+    }}
+  >
+    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'Enhanced user engagement',
+        description:
+          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
+      },
+      {
+        title: 'Continuous improvement',
+        description:
+          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
+      },
+      {
+        title: 'Time and resource efficiency',
+        description:
+          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
+      },
+      {
+        title: 'Community support',
+        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Astronauts Image',
+    }}
+  >
+    <Fragment slot="content">Designed to foster growth and success.</Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Steps Widget ****************** -->
+
+  <Steps
+    title="Get your dream website up and running in no time with AstroWind."
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Download</span>',
+        description:
+          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
+        icon: 'tabler:package',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">Add content</span>',
+        description:
+          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
+        icon: 'tabler:letter-case',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">Customize styles</span>',
+        description:
+          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
+        icon: 'tabler:paint',
+      },
+      {
+        title: 'Ready!',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
+      alt: 'Steps image',
+    }}
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="Most used widgets"
+    subtitle="Provides frequently used components for building websites using Tailwind CSS v4"
+    tagline="Components"
+    items={[
+      {
+        title: 'Headers',
+        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
+        icon: 'flat-color-icons:template',
+      },
+      {
+        title: 'Heros',
+        description:
+          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
+        icon: 'flat-color-icons:gallery',
+      },
+      {
+        title: 'Features',
+        description:
+          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
+        icon: 'flat-color-icons:approval',
+      },
+      {
+        title: 'Content',
+        description:
+          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
+        icon: 'flat-color-icons:document',
+      },
+      {
+        title: 'Call-to-Action',
+        description:
+          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
+        icon: 'flat-color-icons:advertising',
+      },
+      {
+        title: 'Pricing',
+        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
+        icon: 'flat-color-icons:currency-exchange',
+      },
+      {
+        title: 'Testimonial',
+        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
+        icon: 'flat-color-icons:voice-presentation',
+      },
+      {
+        title: 'Contact',
+        description:
+          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
+        icon: 'flat-color-icons:business-contact',
+      },
+      {
+        title: 'Footers',
+        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
+        icon: 'flat-color-icons:database',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- HighlightedPosts Widget ******* -->
+
+  <BlogLatestPosts
+    title="Find out more content in our Blog"
+    information={`The blog is used to display AstroWind documentation.
+                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro v6 + Tailwind CSS v4.
+                        Astro is a very interesting technology. Thanks.
+                `}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'Why AstroWind?',
+        description:
+          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
+      },
+      {
+        title: 'What do I need to start?',
+        description:
+          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
+      },
+      {
+        title: 'How to install the Astro + Tailwind CSS template?',
+        description:
+          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
+      },
+      {
+        title: "What's something that you don't understand?",
+        description:
+          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
+      },
+      {
+        title: 'What is something that you would like to try again?',
+        description:
+          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
+      },
+      {
+        title: 'If you could only ask one question to each person you meet, what would that question be?',
+        description:
+          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
+      },
+    ]}
+  />
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    stats={[
+      { title: 'Downloads', amount: '132K' },
+      { title: 'Stars', amount: '24.8K' },
+      { title: 'Forks', amount: '10.3K' },
+      { title: 'Users', amount: '48.4K' },
+    ]}
+  />
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get template',
+        href: 'https://github.com/arthelokyo/astrowind',
+        target: '_blank',
+        icon: 'tabler:download',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
+      waste more time! :P
+    </Fragment>
+  </CallToAction>
 </Layout>
