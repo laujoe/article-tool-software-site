@@ -94,7 +94,15 @@ const getSite = (config: Config) => {
     googleSiteVerificationId: '',
   };
 
-  return merge({}, _default, config?.site ?? {}) as SiteConfig;
+  const site = merge({}, _default, config?.site ?? {}) as SiteConfig;
+  const siteUrl = process.env.SITE_URL || process.env.PUBLIC_SITE_URL;
+  const basePath = process.env.BASE_PATH || process.env.PUBLIC_BASE_PATH;
+
+  return {
+    ...site,
+    site: siteUrl || site.site,
+    base: basePath || site.base,
+  };
 };
 
 const getMetadata = (config: Config) => {
