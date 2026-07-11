@@ -1,228 +1,134 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
+import { Icon } from 'astro-icon/components';
+
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'About us',
+  title: '关于作者',
 };
+
+const profile = {
+  name: 'Lau Joe',
+  role: 'Article-Tool 开发者 / 浙江大学博士研究生',
+  location: '中国',
+  email: 'Quintuple0935@163.com',
+  intro: '本硕就读于美院，博士就读于浙江大学。研究方向聚焦于东亚美术史、中外美术交流，业余时间进行学术软件开发。',
+  statement:
+    'Article-Tool 是我开发的第一款软件，主要目的为自用。为了覆盖基本的开发费用，故公开分发。您的付费支持，对我来说十分重要。',
+};
+
+const contactLinks = [
+  { label: '联系邮箱', value: profile.email, icon: 'tabler:mail', href: `mailto:${profile.email}` },
+  { label: '个人博客', value: 'https://www.laujoe.top/', icon: 'tabler:world', href: 'https://www.laujoe.top/' },
+  {
+    label: '学术厂牌',
+    value: 'Soar Freely（微信公众号）',
+    icon: 'tabler:brand-wechat',
+    href: 'https://mp.weixin.qq.com/s/80ap1Uew0Ci0rUnfPJLDGA',
+  },
+];
+
+const timeline = [
+  {
+    period: '2026-06 - 2028-06',
+    title: 'Article-Tool 持续迭代',
+    description: '围绕投稿管理、资料对象、日程任务、AI 报告、会议和基金项目持续优化。',
+  },
+  {
+    period: '2026-08',
+    title: '筹备开发新的学术软件',
+    description: '',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <section class="bg-slate-50 py-14 dark:bg-slate-950 lg:py-20">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
+        <aside
+          class="rounded-md border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/70 dark:border-slate-700 dark:bg-slate-900 dark:shadow-none sm:p-8"
+        >
+          <p class="text-sm font-semibold tracking-wide text-accent dark:text-blue-300">关于作者</p>
+          <h1 class="mt-4 text-5xl font-bold tracking-tight text-slate-950 dark:text-white">{profile.name}</h1>
+          <p class="mt-3 text-xl font-semibold leading-8 text-slate-800 dark:text-slate-100">{profile.role}</p>
+          <p class="mt-6 text-base leading-8 text-slate-600 dark:text-slate-300">{profile.intro}</p>
 
-  <Hero
-    tagline="About us"
-    image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
-    }}
-  >
-    <Fragment slot="title">
-      Elevate your online presence with our <br />
-      <span class="text-accent dark:text-white"> Beautiful Website Templates</span>
-    </Fragment>
+          <div class="mt-8 grid gap-3">
+            {
+              contactLinks.map((item) => (
+                <a
+                  href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  class="group flex items-center justify-between gap-4 rounded-md border border-slate-200 bg-slate-50 px-4 py-3 transition hover:border-blue-300 hover:bg-blue-50 dark:border-slate-700 dark:bg-slate-950 dark:hover:border-blue-500/50 dark:hover:bg-blue-500/10"
+                >
+                  <span class="flex min-w-0 items-center gap-3">
+                    <span class="flex size-10 shrink-0 items-center justify-center rounded-md bg-white text-blue-700 shadow-sm dark:bg-slate-800 dark:text-blue-200">
+                      <Icon name={item.icon} class="size-5" />
+                    </span>
+                    <span>
+                      <span class="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                        {item.label}
+                      </span>
+                      <span class="mt-0.5 block truncate text-base font-bold text-slate-950 dark:text-white">
+                        {item.value}
+                      </span>
+                    </span>
+                  </span>
+                  <Icon
+                    name="tabler:external-link"
+                    class="size-5 shrink-0 text-blue-700 opacity-70 transition group-hover:translate-x-0.5 group-hover:opacity-100 dark:text-blue-300"
+                  />
+                </a>
+              ))
+            }
+          </div>
+        </aside>
 
-    <Fragment slot="subtitle">
-      Donec efficitur, ipsum quis congue luctus, mauris magna convallis mauris, eu auctor nisi lectus non augue. Donec
-      quis lorem non massa vulputate efficitur ac at turpis. Sed tincidunt ex a nunc convallis, et lobortis nisi tempus.
-      Suspendisse vitae nisi eget tortor luctus maximus sed non lectus.
-    </Fragment>
-  </Hero>
+        <div class="h-full">
+          <div
+            class="flex h-full flex-col justify-center rounded-md border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-slate-50 p-6 dark:border-blue-500/20 dark:from-blue-500/10 dark:via-slate-900 dark:to-slate-950 sm:p-8 lg:min-h-full"
+          >
+            <p class="text-sm font-semibold text-blue-700 dark:text-blue-300">个人说明</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
+              把学术管理做成可持续的工具
+            </h2>
+            <p class="mt-5 text-lg leading-8 text-slate-600 dark:text-slate-300">{profile.statement}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Stats Widget ****************** -->
+  <section class="bg-white py-14 dark:bg-slate-900 lg:py-16">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
+      <div>
+        <p class="text-sm font-semibold tracking-wide text-accent dark:text-blue-300">时间线</p>
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">工作重心</h2>
+      </div>
 
-  <Stats
-    title="Statistics about us"
-    stats={[
-      { title: 'Offices', amount: '4' },
-      { title: 'Employees', amount: '248' },
-      { title: 'Templates', amount: '12' },
-      { title: 'Awards', amount: '24' },
-    ]}
-  />
-
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    title="Our templates"
-    subtitle="Etiam scelerisque, enim eget vestibulum luctus, nibh mauris blandit nulla, nec vestibulum risus justo ut enim. Praesent lacinia diam et ante imperdiet euismod."
-    columns={3}
-    isBeforeContent={true}
-    items={[
-      {
-        title: 'Educational',
-        description:
-          'Morbi faucibus luctus quam, sit amet aliquet felis tempor id. Cras augue massa, ornare quis dignissim a, molestie vel nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Interior Design',
-        description:
-          'Vivamus porttitor, tortor convallis aliquam pretium, turpis enim consectetur elit, vitae egestas purus erat ac nunc nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Photography',
-        description:
-          'Duis sed lectus in nisl vehicula porttitor eget quis odio. Aliquam erat volutpat. Nulla eleifend nulla id sem fermentum.',
-        icon: 'tabler:template',
-      },
-    ]}
-  />
-
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    columns={3}
-    isAfterContent={true}
-    items={[
-      {
-        title: 'E-commerce',
-        description:
-          'Rutrum non odio at vehicula. Proin ipsum justo, dignissim in vehicula sit amet, dignissim id quam. Sed ac tincidunt sapien.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Blog',
-        description:
-          'Nullam efficitur volutpat sem sed fringilla. Suspendisse et enim eu orci volutpat laoreet ac vitae libero.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Business',
-        description:
-          'Morbi et elit finibus, facilisis justo ut, pharetra ipsum. Donec efficitur, ipsum quis congue luctus, mauris magna.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Suspendisse vitae nisi eget tortor luctus maximus sed non lectus. Cras malesuada pretium placerat. Nullam venenatis dolor a ante rhoncus.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Medical',
-        description:
-          'Vestibulum malesuada lacus id nibh posuere feugiat. Nam volutpat nulla a felis ultrices, id suscipit mauris congue. In hac habitasse platea dictumst.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus.',
-        icon: 'tabler:template',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
-    }}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Our values"
-    subtitle="Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus. Nulla facilisi. Vestibulum malesuada lacus."
-    items={[
-      {
-        title: 'Customer-centric approach',
-        description:
-          'Donec id nibh neque. Quisque et fermentum tortor. Fusce vitae dolor a mauris dignissim commodo. Ut eleifend luctus condimentum.',
-      },
-      {
-        title: 'Constant Improvement',
-        description:
-          'Phasellus laoreet fermentum venenatis. Vivamus dapibus pulvinar arcu eget mattis. Fusce eget mauris leo.',
-      },
-      {
-        title: 'Ethical Practices',
-        description:
-          'Vestibulum imperdiet libero et lectus molestie, et maximus augue porta. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-      },
-    ]}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Achievements"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla, sed porttitor est nibh at nulla."
-    isReversed={true}
-    callToAction={{
-      text: 'See more',
-      href: '/',
-    }}
-    items={[
-      {
-        title: 'Global reach',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
-        icon: 'tabler:globe',
-      },
-      {
-        title: 'Positive customer feedback and reviews',
-        description:
-          'Cras semper nulla leo, eget laoreet erat cursus sed. Praesent faucibus massa in purus iaculis dictum.',
-        icon: 'tabler:message-star',
-      },
-      {
-        title: 'Awards and recognition as industry experts',
-        description:
-          'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus, blandit lobortis ex rhoncus vitae.',
-        icon: 'tabler:award',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Our locations"
-    tagline="Find us"
-    columns={4}
-    items={[
-      {
-        title: 'EE.UU',
-        description: '1234 Lorem Ipsum St, 12345, Miami',
-      },
-      {
-        title: 'Spain',
-        description: '5678 Lorem Ipsum St, 56789, Madrid',
-      },
-      {
-        title: 'Australia',
-        description: '9012 Lorem Ipsum St, 90123, Sydney',
-      },
-      {
-        title: 'Brazil',
-        description: '3456 Lorem Ipsum St, 34567, São Paulo',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Technical Support"
-    tagline="Contact us"
-    columns={2}
-    items={[
-      {
-        title: 'Chat with us',
-        description:
-          'Integer luctus laoreet libero, auctor varius purus rutrum sit amet. Ut nec molestie nisi, quis eleifend mi.',
-        icon: 'tabler:messages',
-      },
-      {
-        title: 'Call us',
-        description:
-          'Mauris faucibus finibus orci, in posuere elit viverra non. In hac habitasse platea dictumst. Cras lobortis metus a hendrerit congue.',
-        icon: 'tabler:headset',
-      },
-    ]}
-  />
+      <ol class="relative space-y-5 border-l border-slate-200 pl-6 dark:border-slate-700">
+        {
+          timeline.map((item, index) => (
+            <li class="relative">
+              <div
+                class:list={[
+                  'absolute -left-[31px] top-6 flex size-3 rounded-full ring-4',
+                  index === 0
+                    ? 'bg-blue-700 ring-blue-100 dark:bg-blue-300 dark:ring-blue-500/20'
+                    : 'bg-slate-300 ring-white dark:bg-slate-600 dark:ring-slate-900',
+                ]}
+              />
+              <article class="rounded-md border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950 sm:p-6">
+                <p class="text-sm font-semibold text-blue-700 dark:text-blue-300">{item.period}</p>
+                <h3 class="mt-2 text-xl font-bold text-slate-950 dark:text-white">{item.title}</h3>
+                <p class="mt-3 text-base leading-7 text-slate-600 dark:text-slate-300">{item.description}</p>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
 </Layout>

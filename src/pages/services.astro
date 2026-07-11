@@ -1,224 +1,249 @@
 ---
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Content from '~/components/widgets/Content.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { Icon } from 'astro-icon/components';
+
 import Layout from '~/layouts/PageLayout.astro';
 
+type UpdateData = {
+  version: string;
+  title: string;
+  releaseDate: string;
+  channelLabel: string;
+  publicDownloadVersion: string;
+  notes: string[];
+  downloads: Record<string, string>;
+  pageUrl?: string;
+  force: boolean;
+};
+
+type ChangelogEntry = {
+  date: string;
+  version: string;
+  title: string;
+  tags: string[];
+  text: string;
+};
+
+type ChangelogData = {
+  product: string;
+  subtitle: string;
+  summary: string;
+  updates: ChangelogEntry[];
+};
+
+const updateData = JSON.parse(
+  readFileSync(join(process.cwd(), 'public/article-tool/update.json'), 'utf-8')
+) as UpdateData;
+
+const changelogData = JSON.parse(
+  readFileSync(join(process.cwd(), 'public/article-tool/changelog-data.json'), 'utf-8')
+) as ChangelogData;
+
 const metadata = {
-  title: 'Services',
+  title: '下载更新',
+};
+
+const updates = [...changelogData.updates].reverse();
+const downloadEntries = Object.entries(updateData.downloads);
+
+const splitUpdateText = (text: string) => {
+  const parts = text
+    .split(/(?=（\d+）)/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+  return parts.length > 1 ? parts : [text];
+};
+
+const tagStyles: Record<string, string> = {
+  BUG修复: 'bg-rose-50 text-rose-700 ring-rose-100 dark:bg-rose-500/10 dark:text-rose-200 dark:ring-rose-500/20',
+  功能增加: 'bg-blue-50 text-blue-700 ring-blue-100 dark:bg-blue-500/10 dark:text-blue-200 dark:ring-blue-500/20',
+  视觉升级:
+    'bg-violet-50 text-violet-700 ring-violet-100 dark:bg-violet-500/10 dark:text-violet-200 dark:ring-violet-500/20',
+  基础框架: 'bg-slate-100 text-slate-700 ring-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700',
+  压力测试: 'bg-amber-50 text-amber-700 ring-amber-100 dark:bg-amber-500/10 dark:text-amber-200 dark:ring-amber-500/20',
+  正式版:
+    'bg-emerald-50 text-emerald-700 ring-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-200 dark:ring-emerald-500/20',
+};
+
+const shouldShowInlineVersion = (item: ChangelogEntry) => {
+  const title = item.title.toLowerCase().replace(/\s+/g, '');
+  const compactTitle = title.replace(/\./g, '');
+  const version = item.version.toLowerCase().replace(/^v/, '');
+  const compactVersion = version.replace(/\./g, '');
+
+  return !title.includes(version) && !compactTitle.includes(compactVersion);
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <section class="relative overflow-hidden bg-slate-50 dark:bg-slate-950">
+    <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent"></div>
+    <div
+      class="mx-auto grid max-w-6xl items-stretch gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20"
+    >
+      <div class="flex h-full max-w-3xl flex-col">
+        <p class="text-sm font-semibold tracking-wide text-accent dark:text-blue-300">版本中心</p>
+        <h1 class="mt-3 text-4xl font-bold tracking-tight text-slate-950 dark:text-white md:text-5xl">
+          Article-Tool 下载更新
+        </h1>
+        <p class="mt-5 text-lg leading-8 text-slate-600 dark:text-slate-300">{changelogData.summary}</p>
+        <div
+          id="download"
+          class="mt-8 rounded-md border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-slate-50 p-4 shadow-sm dark:border-blue-500/20 dark:from-blue-500/10 dark:via-slate-900 dark:to-slate-950 sm:p-5"
+        >
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="text-sm font-semibold text-blue-700 dark:text-blue-300">下载渠道</p>
+              <h2 class="mt-1 text-2xl font-bold tracking-tight text-slate-950 dark:text-white">选择一个网盘入口</h2>
+            </div>
+            <p class="text-sm leading-6 text-slate-500 dark:text-slate-400">提取码和文件版本以网盘页面显示为准。</p>
+          </div>
 
-  <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
-    }}
-  />
+          <div class:list={['mt-5 grid gap-3', downloadEntries.length > 1 && 'sm:grid-cols-2']}>
+            {
+              downloadEntries.map(([name, href]) => (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center justify-between gap-4 rounded-md border border-slate-200 bg-white px-4 py-4 transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:hover:border-blue-500/50 dark:hover:bg-blue-500/10"
+                >
+                  <span class="flex min-w-0 items-center gap-3">
+                    <span class="flex size-10 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700 shadow-sm dark:bg-slate-800 dark:text-blue-200">
+                      <Icon name="tabler:cloud-download" class="size-5" />
+                    </span>
+                    <span>
+                      <span class="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                        网盘下载
+                      </span>
+                      <span class="mt-0.5 block text-xl font-bold text-slate-950 dark:text-white">{name}</span>
+                    </span>
+                  </span>
+                  <Icon
+                    name="tabler:external-link"
+                    class="size-5 shrink-0 text-blue-700 transition group-hover:translate-x-0.5 dark:text-blue-300"
+                  />
+                </a>
+              ))
+            }
+          </div>
 
-  <!-- Features2 Widget ************** -->
+          <div
+            class="mt-4 flex flex-col gap-3 rounded-md border border-blue-100 bg-white/75 px-4 py-3 text-sm leading-6 text-slate-600 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-slate-300 sm:flex-row sm:items-center"
+          >
+            <Icon name="tabler:info-circle" class="size-5 shrink-0 text-blue-700 dark:text-blue-300" />
+            <span>下载后可先使用免费版确认工作流；需要长期整理、扩展字段和持续追踪投稿流程时，再购买买断授权。</span>
+          </div>
+        </div>
+      </div>
 
-  <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
-    columns={3}
-    items={[
-      {
-        title: 'Educational',
-        description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Interior Design',
-        description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
-        icon: 'tabler:home-star',
-      },
-      {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
-        icon: 'tabler:photo',
-      },
-      {
-        title: 'E-commerce',
-        description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
-        icon: 'tabler:shopping-cart',
-      },
-      {
-        title: 'Blog',
-        description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
-        icon: 'tabler:article',
-      },
-      {
-        title: 'Business',
-        description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
-        icon: 'tabler:building-store',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
-      },
-    ]}
-  />
+      <div
+        class="flex h-full flex-col rounded-md border border-blue-100 bg-white p-6 shadow-lg shadow-slate-200/70 dark:border-slate-700 dark:bg-slate-900 dark:shadow-none sm:p-7"
+      >
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold text-blue-700 dark:text-blue-300">{updateData.channelLabel}</p>
+            <h2 class="mt-1 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">{updateData.title}</h2>
+          </div>
+          <div
+            class="flex size-14 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-200"
+          >
+            <Icon name="tabler:sparkles" class="size-7" />
+          </div>
+        </div>
 
-  <!-- Content Widget **************** -->
+        <div class="mt-6 grid gap-3 sm:grid-cols-2">
+          <div class="rounded-md border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-950">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Version</p>
+            <p class="mt-1 text-2xl font-bold text-slate-950 dark:text-white">{updateData.version}</p>
+          </div>
+          <div class="rounded-md border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-950">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Date</p>
+            <p class="mt-1 text-2xl font-bold text-slate-950 dark:text-white">{updateData.releaseDate}</p>
+          </div>
+        </div>
 
-  <Content
-    isReversed
-    items={[
-      {
-        title: 'High-Quality Designs',
-        description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
-      },
-      {
-        title: 'Customization Tools',
-        description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
-      },
-      {
-        title: 'Pre-Designed Elements',
-        description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
-      },
-      {
-        title: 'Preview and Mockup Views',
-        description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
-    </Fragment>
-  </Content>
+        <div class="mt-6 grid flex-1 auto-rows-fr gap-3">
+          {
+            updateData.notes.map((note) => (
+              <div class="flex h-full gap-3 rounded-md bg-blue-50/70 p-4 text-sm leading-6 text-slate-700 dark:bg-blue-500/10 dark:text-slate-200">
+                <Icon name="tabler:circle-dot" class="mt-0.5 size-5 shrink-0 text-blue-700 dark:text-blue-300" />
+                <span>{note}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Content Widget **************** -->
+  <section id="changelog" class="bg-white py-14 dark:bg-slate-900 lg:py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+        <div class="lg:sticky lg:top-28 lg:self-start">
+          <p class="text-sm font-semibold tracking-wide text-accent dark:text-blue-300">更新记录</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">历史更新记录</h2>
+          <p class="mt-4 text-base leading-7 text-slate-600 dark:text-slate-300">
+            共整理 {changelogData.updates.length} 条版本记录。时间线按最新在前排列，方便快速查看最近修复和新增功能。
+          </p>
+        </div>
 
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Time Savings',
-        description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Professional Appearance',
-        description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Cost-Efficiency',
-        description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Instant Download',
-        description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
-        icon: 'tabler:file-download',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits</h3>
-    </Fragment>
-  </Content>
+        <ol class="relative space-y-5 border-l border-slate-200 pl-6 dark:border-slate-700">
+          {
+            updates.map((item, index) => (
+              <li class="relative">
+                <div
+                  class:list={[
+                    'absolute -left-[31px] top-6 flex size-3 rounded-full ring-4',
+                    index === 0
+                      ? 'bg-blue-700 ring-blue-100 dark:bg-blue-300 dark:ring-blue-500/20'
+                      : 'bg-slate-300 ring-white dark:bg-slate-600 dark:ring-slate-900',
+                  ]}
+                />
+                <article class="rounded-md border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950 sm:p-6">
+                  <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">{item.date}</p>
+                      <h3 class="mt-1 text-2xl font-bold text-slate-950 dark:text-white">
+                        {item.title}
+                        {shouldShowInlineVersion(item) && (
+                          <span class="ml-2 text-base font-semibold text-blue-700 dark:text-blue-300">
+                            v{item.version}
+                          </span>
+                        )}
+                      </h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                      {item.tags.map((tag) => (
+                        <span
+                          class:list={[
+                            'inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ring-1',
+                            tagStyles[tag] ??
+                              'bg-slate-100 text-slate-700 ring-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700',
+                          ]}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
 
-  <!-- Testimonials Widget *********** -->
-
-  <Testimonials
-    title="Words from real customers"
-    testimonials={[
-      {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
-        },
-      },
-      {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
-        },
-      },
-      {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
-        image: {
-          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
-        },
-      },
-    ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/arthelokyo/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
-      },
-    ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
-  />
+                  <div class="mt-5 space-y-3">
+                    {splitUpdateText(item.text).map((text) => (
+                      <p class="rounded-md bg-slate-50 px-4 py-3 text-sm leading-7 text-slate-600 dark:bg-slate-900 dark:text-slate-300">
+                        {text}
+                      </p>
+                    ))}
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
 </Layout>

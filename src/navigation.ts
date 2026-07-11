@@ -1,182 +1,108 @@
 import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 
+const articleToolIntroHref = getPermalink(
+  '20260623articletool-wo3-ge4-ren2-zhi4-zuo4-de-xue2-shu4-gong1-zuo4-tai2-ruan3-jian4/articletool-de-ji1-ben3-jie4-shao4',
+  'post'
+);
+
 export const headerData = {
   links: [
     {
-      text: 'Homes',
-      links: [
-        {
-          text: 'SaaS',
-          href: getPermalink('/homes/saas'),
-        },
-        {
-          text: 'Startup',
-          href: getPermalink('/homes/startup'),
-        },
-        {
-          text: 'Mobile App',
-          href: getPermalink('/homes/mobile-app'),
-        },
-        {
-          text: 'Personal',
-          href: getPermalink('/homes/personal'),
-        },
-      ],
+      text: '主页',
+      href: getPermalink('/'),
     },
     {
-      text: 'Pages',
+      text: '产品服务',
       links: [
         {
-          text: 'Features (Anchor Link)',
-          href: getPermalink('/#features'),
-        },
-        {
-          text: 'Services',
+          text: '下载更新',
           href: getPermalink('/services'),
         },
         {
-          text: 'Pricing',
+          text: '付费方案',
           href: getPermalink('/pricing'),
         },
         {
-          text: 'About us',
-          href: getPermalink('/about'),
-        },
-        {
-          text: 'Contact',
+          text: '联系我们',
           href: getPermalink('/contact'),
         },
         {
-          text: 'Terms',
+          text: '服务条款',
           href: getPermalink('/terms'),
         },
         {
-          text: 'Privacy policy',
+          text: '隐私政策',
           href: getPermalink('/privacy'),
         },
-      ],
-    },
-    {
-      text: 'Landing',
-      links: [
         {
-          text: 'Lead Generation',
-          href: getPermalink('/landing/lead-generation'),
-        },
-        {
-          text: 'Long-form Sales',
-          href: getPermalink('/landing/sales'),
-        },
-        {
-          text: 'Click-Through',
-          href: getPermalink('/landing/click-through'),
-        },
-        {
-          text: 'Product Details (or Services)',
-          href: getPermalink('/landing/product'),
-        },
-        {
-          text: 'Coming Soon or Pre-Launch',
-          href: getPermalink('/landing/pre-launch'),
-        },
-        {
-          text: 'Subscription',
-          href: getPermalink('/landing/subscription'),
+          text: '关于作者',
+          href: getPermalink('/about'),
         },
       ],
     },
     {
-      text: 'Blog',
+      text: '博客',
       links: [
         {
-          text: 'Blog List',
+          text: '博客清单',
           href: getBlogPermalink(),
         },
         {
-          text: 'Article',
-          href: getPermalink('get-started-website-with-astro-tailwind-css', 'post'),
-        },
-        {
-          text: 'Article (with MDX)',
-          href: getPermalink('markdown-elements-demo-post', 'post'),
-        },
-        {
-          text: 'Category Page',
-          href: getPermalink('tutorials', 'category'),
-        },
-        {
-          text: 'Tag Page',
-          href: getPermalink('astro', 'tag'),
+          text: 'Article-Tool 的基本介绍与功能讲解',
+          href: articleToolIntroHref,
         },
       ],
     },
+  ],
+  actions: [
     {
-      text: 'Widgets',
-      href: '#',
+      text: '下载软件',
+      href: getPermalink('/services'),
     },
   ],
-  actions: [{ text: 'Download', href: 'https://github.com/arthelokyo/astrowind', target: '_blank' }],
 };
 
 export const footerData = {
   links: [
     {
-      title: 'Product',
+      title: '产品导航',
       links: [
-        { text: 'Features', href: '#' },
-        { text: 'Security', href: '#' },
-        { text: 'Team', href: '#' },
-        { text: 'Enterprise', href: '#' },
-        { text: 'Customer stories', href: '#' },
-        { text: 'Pricing', href: '#' },
-        { text: 'Resources', href: '#' },
+        { text: '功能总览', href: getPermalink('/#features') },
+        { text: '学术工作流', href: getPermalink('/#workflow') },
+        { text: '细节能力', href: getPermalink('/#details') },
+        { text: '常见问题', href: getPermalink('/#faq') },
       ],
     },
     {
-      title: 'Platform',
+      title: '下载与购买',
       links: [
-        { text: 'Developer API', href: '#' },
-        { text: 'Partners', href: '#' },
-        { text: 'Atom', href: '#' },
-        { text: 'Electron', href: '#' },
-        { text: 'AstroWind Desktop', href: '#' },
+        { text: '下载软件', href: getPermalink('/services#download') },
+        { text: '付费方案', href: getPermalink('/pricing') },
+        { text: '联系我们', href: getPermalink('/contact') },
       ],
     },
     {
-      title: 'Support',
+      title: '使用资料',
       links: [
-        { text: 'Docs', href: '#' },
-        { text: 'Community Forum', href: '#' },
-        { text: 'Professional Services', href: '#' },
-        { text: 'Skills', href: '#' },
-        { text: 'Status', href: '#' },
+        { text: '博客清单', href: getBlogPermalink() },
+        { text: '基本介绍与功能讲解', href: articleToolIntroHref },
       ],
     },
     {
-      title: 'Company',
+      title: '关于与政策',
       links: [
-        { text: 'About', href: '#' },
-        { text: 'Blog', href: '#' },
-        { text: 'Careers', href: '#' },
-        { text: 'Press', href: '#' },
-        { text: 'Inclusion', href: '#' },
-        { text: 'Social Impact', href: '#' },
-        { text: 'Shop', href: '#' },
+        { text: '关于作者', href: getPermalink('/about') },
+        { text: '隐私政策', href: getPermalink('/privacy') },
+        { text: '服务条款', href: getPermalink('/terms') },
       ],
     },
   ],
-  secondaryLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
-    { text: 'Privacy Policy', href: getPermalink('/privacy') },
-  ],
+  secondaryLinks: [],
   socialLinks: [
-    { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/arthelokyo/astrowind' },
+    { ariaLabel: '个人博客', icon: 'tabler:world', href: 'https://www.laujoe.top/' },
   ],
   footNote: `
-    Made by <a class="text-blue-600 underline dark:text-muted" href="https://github.com/arthelokyo"> Arthelokyo</a> · All rights reserved.
+    Article-Tool · 本地优先的学术投稿与研究资料工作台
   `,
 };

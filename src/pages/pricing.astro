@@ -1,244 +1,242 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
-import Prices from '~/components/widgets/Pricing.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
 
+import Layout from '~/layouts/PageLayout.astro';
 const metadata = {
-  title: 'Pricing',
+  title: '付费方案',
 };
+
+const paymentHref = 'https://ifdian.net/a/soarfreely';
+
+const plans = [
+  {
+    badge: '当前早鸟价',
+    title: '专业版早鸟买断',
+    price: '39.9',
+    note: '1.7 版本之前的早鸟价格，一次购买，永久使用。',
+    highlight: true,
+    status: '当前开放',
+    features: ['联网授权验证', '单授权支持 2 台设备', '支持 macOS 与 Windows', '完整资料容量', '高级工作流不受限'],
+  },
+  {
+    badge: '1.7 起',
+    title: '专业版标准买断',
+    price: '69.9',
+    note: '1.7 版本之后的标准买断定价，授权同样永久有效。',
+    highlight: false,
+    status: '即将恢复',
+    features: ['联网授权验证', '单授权支持 2 台设备', '支持 macOS 与 Windows', '完整资料容量', '高级工作流不受限'],
+  },
+];
+
+const comparisonRows = [
+  ['资料对象', '8 个自建对象', '不限量'],
+  ['日程任务', '8 个任务', '不限量'],
+  ['自定义字段', '每库 3 个', '不限量'],
+  ['内容块', '每对象 3 个', '不限量'],
+  ['流程记录', '每对象 2 条', '不限量'],
+  ['设备数量', '当前设备体验', '单授权 2 台设备'],
+  ['系统支持', 'macOS / Windows', 'macOS / Windows'],
+  ['授权方式', '轻量免费版', '联网授权 + 本机凭证'],
+];
+
+const purchaseNotices = [
+  {
+    icon: 'tabler:info-circle',
+    title: '先用免费版确认',
+    description: '软件能够免费使用，但是免费版仅用于轻量体验与确认工作流是否适合。',
+  },
+  {
+    icon: 'tabler:shield-check',
+    title: '长期使用建议买断',
+    description: '需要长期整理、扩展字段和持续追踪投稿流程时，建议购买买断授权。',
+  },
+  {
+    icon: 'tabler:receipt-refund',
+    title: '购买后不接受退款',
+    description: '用户购买后，不接受任何退款请求。请在购买前先下载试用，确认软件符合你的工作流。',
+  },
+  {
+    icon: 'tabler:users-group',
+    title: '付费后加入售后群',
+    description: '用户付费后，请及时与开发者联系，加入售后群，便于后续授权核对和版本通知。',
+  },
+  {
+    icon: 'tabler:devices',
+    title: '支持 2 台设备',
+    description: '一个授权可用于 2 台设备，支持 macOS 与 Windows，适合在主力电脑和备用电脑之间使用。',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
+  <section class="bg-slate-50 dark:bg-slate-950">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-wide text-accent dark:text-blue-300">付费方案</p>
+        <h1 class="mt-3 text-4xl font-bold tracking-tight text-slate-950 dark:text-white md:text-5xl">
+          简单买断，不做订阅
+        </h1>
+        <p class="mt-5 text-lg leading-8 text-slate-600 dark:text-slate-300">
+          Article-Tool 免费版可以先确认工作流；需要长期整理资料、扩展字段、持续追踪投稿流程时，可以升级专业版买断授权。
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <HeroText
-    tagline="Pricing"
-    title="Stellar Pricing for Every Journey"
-    subtitle="Choose the perfect plan that aligns with your cosmic goals."
-  />
+  <section class="bg-white py-12 dark:bg-slate-900 lg:py-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-2">
+        {
+          plans.map((plan) => (
+            <article
+              class:list={[
+                'relative overflow-hidden rounded-md border bg-white p-7 shadow-lg shadow-slate-200/70 dark:bg-slate-950 dark:shadow-none sm:p-8',
+                plan.highlight
+                  ? 'border-blue-200 ring-1 ring-blue-100 dark:border-blue-500/40 dark:ring-blue-500/20'
+                  : 'border-slate-200 dark:border-slate-700',
+              ]}
+            >
+              <div
+                class:list={[
+                  'absolute inset-x-0 top-0 h-1',
+                  plan.highlight ? 'bg-blue-600' : 'bg-slate-200 dark:bg-slate-700',
+                ]}
+              />
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <span
+                  class:list={[
+                    'rounded-full px-3 py-1 text-sm font-semibold',
+                    plan.highlight
+                      ? 'bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-200'
+                      : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300',
+                  ]}
+                >
+                  {plan.badge}
+                </span>
+                <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">{plan.status}</span>
+              </div>
 
-  <!-- Pricing Widget ******************* -->
+              <h2 class="mt-6 text-2xl font-bold text-slate-950 dark:text-white">{plan.title}</h2>
+              <div class="mt-5 flex items-end gap-2">
+                <span class="text-3xl font-bold text-slate-950 dark:text-white">¥</span>
+                <span class="text-6xl font-bold tracking-tight text-slate-950 dark:text-white">{plan.price}</span>
+                <span class="pb-2 text-xl font-semibold text-slate-500 dark:text-slate-400">买断</span>
+              </div>
+              <p class="mt-4 text-base leading-7 text-slate-600 dark:text-slate-300">{plan.note}</p>
 
-  <Prices
-    title="Our prices"
-    subtitle="Only pay for what you need"
-    prices={[
-      {
-        title: 'basic',
-        subtitle: 'Optimal choice for personal use',
-        price: 29,
-        period: 'per month',
-        items: [
-          {
-            description: 'Etiam in libero, et volutpat',
-          },
-          {
-            description: 'Aenean ac nunc dolor tristique',
-          },
-          {
-            description: 'Cras scelerisque accumsan lib',
-          },
-          {
-            description: 'In hac habitasse',
-          },
-        ],
-        callToAction: {
-          target: '_blank',
-          text: 'Get started',
-          href: '#',
-        },
-      },
-      {
-        title: 'standard',
-        subtitle: 'Optimal choice for small teams',
-        price: 69,
-        period: 'Per Month',
-        items: [
-          {
-            description: 'Proin vel laoreet',
-          },
-          {
-            description: 'Ut efficitur habitasse egestas',
-          },
-          {
-            description: 'Volutpat hac curabitur',
-          },
-          {
-            description: 'Pellentesque blandit ut nibh',
-          },
-          {
-            description: 'Donec fringilla sem',
-          },
-        ],
-        callToAction: {
-          target: '_blank',
-          text: 'Get started',
-          href: '#',
-        },
-        hasRibbon: true,
-        ribbonTitle: 'popular',
-      },
-      {
-        title: 'premium',
-        subtitle: 'Optimal choice for companies',
-        price: 199,
-        period: 'Per Month',
-        items: [
-          {
-            description: 'Curabitur suscipit risus',
-          },
-          {
-            description: 'Aliquam habitasse malesuada',
-          },
-          {
-            description: 'Suspendisse sit amet blandit',
-          },
-          {
-            description: 'Suspendisse auctor blandit dui',
-          },
-        ],
-        callToAction: {
-          target: '_blank',
-          text: 'Get started',
-          href: '#',
-        },
-      },
-    ]}
-  />
+              <div class="mt-7 space-y-3">
+                {plan.features.map((feature) => (
+                  <div class="flex items-center gap-3 text-slate-700 dark:text-slate-200">
+                    <Icon name="tabler:check" class="size-5 shrink-0 text-blue-600 dark:text-blue-300" />
+                    <span class="text-base">{feature}</span>
+                  </div>
+                ))}
+              </div>
 
-  <!-- Features3 Widget ************** -->
+              <div class="mt-8">
+                <a
+                  href={paymentHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class:list={[
+                    'inline-flex w-full items-center justify-center rounded-md px-5 py-3 text-base font-semibold shadow-sm transition focus:outline-none focus:ring-4',
+                    plan.highlight
+                      ? 'bg-blue-700 text-white hover:bg-blue-800 focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-500 dark:focus:ring-blue-500/30'
+                      : 'border border-slate-200 bg-white text-slate-800 hover:border-blue-300 hover:text-blue-700 focus:ring-blue-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:border-blue-500 dark:hover:text-blue-200 dark:focus:ring-blue-500/20',
+                  ]}
+                >
+                  <Icon name="tabler:credit-card-pay" class="mr-2 size-5" />
+                  前往付款页面
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  <Features3
-    title="Price-related features"
-    subtitle="Discover the advantages of choosing our plans"
-    columns={2}
-    items={[
-      {
-        title: 'Tiered Pricing Plans',
-        description: 'Choose from a range of pricing plans designed to accommodate different budgets and requirements.',
-        icon: 'tabler:stairs',
-      },
-      {
-        title: 'Transparent Pricing',
-        description: 'Clearly displayed pricing details for each plan, with no hidden costs or unexpected charges.',
-        icon: 'tabler:flip-vertical',
-      },
-      {
-        title: 'Secure Payment Methods',
-        description: 'Secure payment gateways to protect your financial information during transactions.',
-        icon: 'tabler:shield-lock',
-      },
-      {
-        title: 'Instant Access',
-        description: `Immediate access to your chosen plan's features and templates upon subscription.`,
-        icon: 'tabler:accessible',
-      },
-      {
-        title: 'Upgrade Value',
-        description: 'Upgrade to higher-tier plans to unlock more features and benefits for an enhanced experience.',
-        icon: 'tabler:chevrons-up',
-      },
-      {
-        title: '24H support',
-        description: 'Questions answered via live chat, email or phone, every calendar day.',
-        icon: 'tabler:headset',
-      },
-    ]}
-    classes={{ container: 'max-w-5xl' }}
-  />
+  <section class="bg-slate-50 pb-0 pt-14 dark:bg-slate-950 lg:pt-16">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-wide text-accent dark:text-blue-300">版本能力</p>
+        <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
+          免费版用于体验，专业版用于长期管理
+        </h2>
+        <p class="mt-4 text-base leading-7 text-slate-600 dark:text-slate-300">
+          免费版适合确认软件是否适合自己的学术工作流。需要长期整理期刊、稿件、日程、附件和投稿记录时，建议升级专业版。
+        </p>
+      </div>
 
-  <!-- Steps Widget ****************** -->
+      <div
+        class="mt-8 overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900"
+      >
+        <div
+          class="grid grid-cols-[1.1fr_1fr_1fr] bg-slate-100 text-sm font-bold text-slate-800 dark:bg-slate-800 dark:text-slate-100"
+        >
+          <div class="px-4 py-4 sm:px-6">能力</div>
+          <div class="px-4 py-4 sm:px-6">免费版</div>
+          <div class="px-4 py-4 sm:px-6">专业版</div>
+        </div>
+        {
+          comparisonRows.map(([feature, free, pro]) => (
+            <div class="grid grid-cols-[1.1fr_1fr_1fr] border-t border-slate-200 text-sm dark:border-slate-700 sm:text-base">
+              <div class="px-4 py-4 font-semibold text-slate-800 dark:text-slate-100 sm:px-6">{feature}</div>
+              <div class="px-4 py-4 text-slate-600 dark:text-slate-300 sm:px-6">{free}</div>
+              <div class="px-4 py-4 font-semibold text-blue-700 dark:text-blue-300 sm:px-6">{pro}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  <Steps
-    title="A guided journey from plans to creativity"
-    tagline="simplified process"
-    isReversed={true}
-    items={[
-      {
-        title: 'Explore plans',
-        icon: 'tabler:number-1',
-      },
-      {
-        title: 'Select a plan',
-        icon: 'tabler:number-2',
-      },
-      {
-        title: 'Sign Up / Log In',
-        icon: 'tabler:number-3',
-      },
-      {
-        title: 'Review order',
-        icon: 'tabler:number-4',
-      },
-      {
-        title: 'Enter payment details',
-        icon: 'tabler:number-5',
-      },
-      {
-        title: 'Confirmation',
-        icon: 'tabler:number-6',
-      },
-      {
-        title: 'Download and start using the template(s)',
-        icon: 'tabler:number-7',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1536816579748-4ecb3f03d72a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
+  <section class="bg-slate-50 pb-14 pt-8 dark:bg-slate-950 lg:pb-16 lg:pt-8">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div>
+        <div
+          class="rounded-md border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/70 dark:border-slate-700 dark:bg-slate-950 dark:shadow-none sm:p-8"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="flex size-12 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-200"
+            >
+              <Icon name="tabler:alert-circle" class="size-6" />
+            </div>
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-wide text-accent dark:text-blue-300">购买前请确认</p>
+              <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">先试用，再买断</h2>
+              <p class="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">
+                软件能够免费使用，但是免费版仅用于轻量体验与确认工作流是否适合。需要长期整理、扩展字段和持续追踪投稿流程时，建议购买买断授权。用户购买后，不接受任何退款请求。用户付费后，请及时与开发者联系，加入售后群。
+              </p>
+            </div>
+          </div>
 
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Pricing FAQs"
-    subtitle="Choosing the right plan is important, and we're here to answer your questions. If you have queries about our pricing options, you're in the right place."
-    columns={1}
-    items={[
-      {
-        title: 'Do the plans come with customer support?',
-        description:
-          'Absolutely, all plans include access to our dedicated customer support to assist you with any queries or concerns.',
-      },
-      {
-        title: 'Is there a trial period for the different plans?',
-        description:
-          "Unfortunately, we don't offer trial periods for the plans. However, you can check out our demo section to preview the quality of our templates.",
-      },
-      {
-        title: 'Can I switch between plans?',
-        description:
-          'Certainly! You can easily upgrade or downgrade your plan, at any time, to find the one that best suits your evolving requirements.',
-      },
-      {
-        title: 'What payment methods do you accept?',
-        description:
-          'We accept major credit cards and online payment methods to ensure a convenient and secure transaction process.',
-      },
-      {
-        title: 'Are there any hidden fees beyond the displayed cost?',
-        description:
-          'No, the subscription cost covers all the features and templates listed under each plan. There are no hidden fees or extra charges.',
-      },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    title="Ready to boost your projects?"
-    subtitle="Join our community of satisfied customers who have transformed their work with our templates."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get started now',
-        href: '/',
-      },
-    ]}
-  />
+          <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:gap-6">
+            {
+              purchaseNotices.map((notice, index) => (
+                <div
+                  class:list={[
+                    'h-full rounded-md border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-900 sm:p-6',
+                    purchaseNotices.length % 2 === 1 && index === purchaseNotices.length - 1 ? 'sm:col-span-2' : '',
+                  ]}
+                >
+                  <div class="flex h-full gap-4">
+                    <div class="flex size-11 shrink-0 items-center justify-center rounded-md bg-white text-blue-700 shadow-sm dark:bg-slate-800 dark:text-blue-200">
+                      <Icon name={notice.icon} class="size-5" />
+                    </div>
+                    <div class="max-w-3xl">
+                      <h3 class="text-lg font-bold leading-7 text-slate-950 dark:text-white">{notice.title}</h3>
+                      <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{notice.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

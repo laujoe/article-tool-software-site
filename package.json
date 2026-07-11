@@ -8,8 +8,12 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "sync:update": "node scripts/sync-release-info.mjs",
+    "predev": "node scripts/sync-release-info.mjs",
     "dev": "astro dev",
+    "prestart": "node scripts/sync-release-info.mjs",
     "start": "astro dev",
+    "prebuild": "node scripts/sync-release-info.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

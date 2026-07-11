@@ -1,13 +1,13 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import { Icon } from 'astro-icon/components';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
-import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
-// import PostTags from "~/components/blog/Tags.astro";
+import PostTags from '~/components/blog/Tags.astro';
 
-import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import { blogListRobots, fetchPosts, getStaticPathsBlogList } from '~/utils/blog';
 
 export const prerender = true;
 
@@ -20,11 +20,15 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
-// const allCategories = await findCategories();
-// const allTags = await findTags();
+const allPosts = await fetchPosts();
+const allTags = allPosts.flatMap((post) => post.tags ?? []);
+const featuredTags = Array.from(new Map(allTags.map((tag) => [tag.slug, tag])).values()).slice(0, 8);
+const categoryCount = new Set(allPosts.flatMap((post) => (post.category?.slug ? [post.category.slug] : []))).size;
+const totalReadingMinutes = allPosts.reduce((total, post) => total + (post.readingTime || 0), 0);
+const pageTitle = currentPage > 1 ? `博客清单 · 第 ${currentPage} 页` : '博客清单';
 
 const metadata = {
-  title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
+  title: `博客清单${currentPage > 1 ? ` — 第 ${currentPage} 页` : ''}`,
   robots: {
     index: blogListRobots?.index && currentPage === 1,
     follow: blogListRobots?.follow,
@@ -36,17 +40,108 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
-    <Headline
-      subtitle="A statically generated blog example with news, tutorials, resources and other interesting content related to AstroWind"
+  <section
+    class="relative overflow-hidden border-b border-slate-200 bg-[#f7fafc] dark:border-slate-800 dark:bg-slate-950"
+  >
+    <div
+      class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.04)_1px,transparent_1px)] bg-[size:48px_48px] opacity-60 dark:bg-[linear-gradient(to_right,rgba(148,163,184,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)]"
     >
-      The Blog
-    </Headline>
-    <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    <!--
-      <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
-      <PostTags tags={allTags}  title="Search by Tags:" />
-    -->
+    </div>
+    <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+      <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
+        <header class="max-w-4xl">
+          <p
+            class="mb-4 inline-flex items-center gap-2 rounded-md bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-700 ring-1 ring-blue-100 dark:bg-blue-500/15 dark:text-blue-200 dark:ring-blue-500/20"
+          >
+            <Icon name="tabler:book-2" class="size-4" />
+            Article-Tool 使用文档
+          </p>
+          <h1
+            class="text-4xl font-bold leading-tight tracking-normal text-slate-950 dark:text-white md:text-5xl lg:text-6xl"
+          >
+            {pageTitle}
+          </h1>
+          <p class="mt-5 max-w-3xl text-xl leading-9 text-slate-600 dark:text-slate-300">
+            这里整理 Article-Tool
+            的使用教程、功能说明和常见工作流示例。你可以按主题查找，也可以从最新文章开始了解软件的完整使用方式。
+          </p>
+          <div class="mt-7 grid gap-3 sm:grid-cols-3">
+            <div
+              class="rounded-md border border-slate-200 bg-white/80 p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80"
+            >
+              <p class="text-sm text-slate-500 dark:text-slate-400">文档数量</p>
+              <p class="mt-1 text-2xl font-bold text-slate-950 dark:text-white">{allPosts.length}</p>
+            </div>
+            <div
+              class="rounded-md border border-slate-200 bg-white/80 p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80"
+            >
+              <p class="text-sm text-slate-500 dark:text-slate-400">主题分类</p>
+              <p class="mt-1 text-2xl font-bold text-slate-950 dark:text-white">{categoryCount || '持续补充'}</p>
+            </div>
+            <div
+              class="rounded-md border border-slate-200 bg-white/80 p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/80"
+            >
+              <p class="text-sm text-slate-500 dark:text-slate-400">阅读体量</p>
+              <p class="mt-1 text-2xl font-bold text-slate-950 dark:text-white">
+                {totalReadingMinutes ? `约 ${totalReadingMinutes} 分钟` : '持续补充'}
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <aside
+          class="rounded-md border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+        >
+          <div class="flex items-center gap-3">
+            <span
+              class="flex size-10 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-200"
+            >
+              <Icon name="tabler:route" class="size-5" />
+            </span>
+            <div>
+              <p class="text-sm font-bold text-slate-950 dark:text-white">阅读路径</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">先建立整体认识，再按模块深入</p>
+            </div>
+          </div>
+          <div class="mt-5 space-y-3 text-sm text-slate-600 dark:text-slate-300">
+            <p class="flex gap-2">
+              <Icon name="tabler:circle-check" class="mt-0.5 size-4 shrink-0 text-emerald-700 dark:text-emerald-300" />
+              第一次了解 Article-Tool，可先阅读基本介绍与功能讲解，判断它是否适合你的学术工作流。
+            </p>
+            <p class="flex gap-2">
+              <Icon name="tabler:circle-check" class="mt-0.5 size-4 shrink-0 text-emerald-700 dark:text-emerald-300" />
+              遇到具体问题时，可围绕期刊库、稿件库、日程和 AI 报告等模块查找说明。
+            </p>
+          </div>
+          {
+            featuredTags.length > 0 && (
+              <div class="mt-5 border-t border-slate-200 pt-5 dark:border-slate-700">
+                <p class="mb-3 text-sm font-semibold text-slate-500 dark:text-slate-400">资料主题</p>
+                <PostTags tags={featuredTags} class="text-sm" />
+              </div>
+            )
+          }
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-10 dark:bg-slate-950 lg:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div
+        class="mb-7 flex flex-col gap-3 border-b border-slate-200 pb-5 dark:border-slate-800 sm:flex-row sm:items-end sm:justify-between"
+      >
+        <div>
+          <p class="text-sm font-semibold text-blue-700 dark:text-blue-300">全部文章</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-normal text-slate-950 dark:text-white">按发布时间整理</h2>
+        </div>
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+          当前显示 {page.data.length} 篇{currentPage > 1 ? ` · 第 ${currentPage} 页` : ''}
+        </p>
+      </div>
+
+      <BlogList posts={page.data} />
+      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} prevText="上一页" nextText="下一页" />
+    </div>
   </section>
 </Layout>

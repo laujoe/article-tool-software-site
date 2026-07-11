@@ -5,6 +5,16 @@ dist/
 # dependencies
 node_modules/
 
+# framework and deploy caches
+.astro/
+.vercel/
+.netlify/
+.cache/
+
+# test and typecheck output
+coverage/
+*.tsbuildinfo
+
 # logs
 npm-debug.log*
 yarn-debug.log*
@@ -20,5 +30,3 @@ pnpm-debug.log*
 .DS_Store
 
 pnpm-lock.yaml
-
-.astro

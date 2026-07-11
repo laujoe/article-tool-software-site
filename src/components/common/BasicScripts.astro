@@ -154,13 +154,154 @@ import { UI } from 'astrowind:config';
     document.querySelector('#header nav')?.classList.add('hidden');
   };
 
+  const initArticleReadingTools = function () {
+    window.__articleReadingToolsCleanup?.();
+    window.__articleReadingToolsCleanup = null;
+
+    const content = document.getElementById('post-content');
+    const desktopToc = document.getElementById('article-toc');
+    const mobileToc = document.getElementById('article-toc-mobile');
+    const backToTop = document.getElementById('article-back-to-top');
+    const progressBar = document.getElementById('article-progress-bar');
+    const progressText = document.getElementById('article-progress-text');
+    const tocCount = document.getElementById('article-toc-count');
+    const currentHeading = document.getElementById('article-current-heading');
+    const tocPanel = document.querySelector('.article-toc-panel');
+    const footer = document.querySelector('footer');
+    const topTriggers = document.querySelectorAll('[data-article-top-trigger]');
+    const links = Array.from(document.querySelectorAll('.article-toc-link'));
+    const scrollOffset = 104;
+
+    if (!content && !backToTop && !links.length) return;
+
+    const controller = new AbortController();
+    const { signal } = controller;
+    window.__articleReadingToolsCleanup = () => controller.abort();
+
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    if (backToTop || topTriggers.length) {
+      const toggleBackToTop = () => {
+        backToTop?.toggleAttribute('data-visible', window.scrollY > 480);
+      };
+
+      backToTop?.addEventListener('click', scrollToTop, { signal });
+      topTriggers.forEach((trigger) => trigger.addEventListener('click', scrollToTop, { signal }));
+      toggleBackToTop();
+      window.addEventListener('scroll', toggleBackToTop, { passive: true, signal });
+    }
+
+    if (!content) return;
+
+    const headings = Array.from(content.querySelectorAll('h2[id], h3[id]')).filter((heading) =>
+      heading.textContent?.trim()
+    );
+
+    if (!headings.length) {
+      desktopToc?.remove();
+      mobileToc?.remove();
+      return;
+    }
+
+    if (tocCount) {
+      tocCount.textContent = `${headings.length} 个章节，可点击跳转`;
+    }
+
+    const activate = (id) => {
+      links.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${id}`;
+        link.toggleAttribute('data-active', isActive);
+        if (isActive && currentHeading) {
+          currentHeading.textContent = link.textContent?.replace(/^\d+\s*/, '').trim() || '正在阅读';
+        }
+      });
+    };
+
+    const updateProgress = () => {
+      if (!progressBar || !content) return;
+
+      const rect = content.getBoundingClientRect();
+      const scrollable = Math.max(1, content.offsetHeight - window.innerHeight + scrollOffset);
+      const progress = Math.min(1, Math.max(0, (scrollOffset - rect.top) / scrollable));
+      const percent = Math.round(progress * 100);
+      progressBar.style.width = `${percent}%`;
+      if (progressText) progressText.textContent = `${percent}%`;
+    };
+
+    const updateTocBoundary = () => {
+      if (!tocPanel || !(tocPanel instanceof HTMLElement)) return;
+
+      const panelTop = tocPanel.getBoundingClientRect().top;
+      const defaultHeight = window.innerHeight - panelTop - 32;
+      const footerTop = footer?.getBoundingClientRect().top;
+      const footerSafeHeight = footerTop === undefined ? defaultHeight : footerTop - panelTop - 48;
+      const availableHeight = Math.max(0, Math.min(defaultHeight, footerSafeHeight));
+
+      tocPanel.style.setProperty('--article-toc-available-height', `${availableHeight}px`);
+      tocPanel.toggleAttribute('data-near-footer', availableHeight < 340);
+    };
+
+    const updateActiveHeading = () => {
+      let active = headings[0];
+
+      headings.forEach((heading) => {
+        if (heading.getBoundingClientRect().top <= scrollOffset + 8) {
+          active = heading;
+        }
+      });
+
+      if (active?.id) activate(active.id);
+    };
+
+    const updateReadingState = () => {
+      updateProgress();
+      updateActiveHeading();
+      updateTocBoundary();
+    };
+
+    document.addEventListener(
+      'click',
+      (event) => {
+        const link = event.target instanceof Element ? event.target.closest('.article-toc-link') : null;
+
+        if (!(link instanceof HTMLAnchorElement)) return;
+
+        const href = link.getAttribute('href') || '';
+        const targetId = href.startsWith('#') ? href.slice(1) : '';
+        const target = targetId ? document.getElementById(targetId) : null;
+
+        if (!target) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - scrollOffset);
+        window.scrollTo({ top, behavior: 'smooth' });
+        history.pushState(null, '', href);
+        activate(targetId);
+        mobileToc?.removeAttribute('open');
+        window.setTimeout(updateReadingState, 260);
+      },
+      { capture: true, signal }
+    );
+
+    updateReadingState();
+    window.addEventListener('scroll', updateReadingState, { passive: true, signal });
+    window.addEventListener('resize', updateReadingState, { signal });
+    window.setTimeout(updateReadingState, 120);
+  };
+
   window.onload = onLoad;
   window.onpageshow = onPageShow;
+  initArticleReadingTools();
 
   document.addEventListener('astro:after-swap', () => {
     initTheme();
     onLoad();
     onPageShow();
+    initArticleReadingTools();
   });
 </script>
 

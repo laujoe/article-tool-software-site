@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import type { Post, Taxonomy } from '~/types';
 import { APP_BLOG } from 'astrowind:config';
 import { cleanSlug, trimSlash, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
+import { extractMarkdownHeadings } from './headings';
 
 const generatePermalink = async ({
   id,
@@ -40,9 +41,39 @@ const generatePermalink = async ({
     .join('/');
 };
 
+const isExternalOrRootPath = (path: string) =>
+  path.startsWith('http://') || path.startsWith('https://') || path.startsWith('/') || path.startsWith('~/');
+
+const getPostDirectory = (post: CollectionEntry<'post'>) => {
+  const sourcePath = String(post.filePath || '');
+
+  if (sourcePath.startsWith('src/data/post/')) {
+    return sourcePath
+      .replace(/^src\/data\/post\//, '')
+      .split('/')
+      .slice(0, -1)
+      .join('/');
+  }
+
+  return post.id.split('/').slice(0, -1).join('/');
+};
+
+const getPostImagePath = (image: string | undefined, post: CollectionEntry<'post'>) => {
+  const cleanImage = String(image || '').trim();
+
+  if (!cleanImage || isExternalOrRootPath(cleanImage)) {
+    return cleanImage || undefined;
+  }
+
+  const postDirectory = getPostDirectory(post);
+
+  return postDirectory ? `~/data/post/${postDirectory}/${cleanImage}` : `~/data/post/${cleanImage}`;
+};
+
 const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> => {
   const { id, data } = post;
   const { Content, remarkPluginFrontmatter } = await render(post);
+  const body = String((post as CollectionEntry<'post'> & { body?: string }).body || '');
 
   const {
     publishDate: rawPublishDate = new Date(),
@@ -83,7 +114,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
 
     title: title,
     excerpt: excerpt,
-    image: image,
+    image: getPostImagePath(image, post),
 
     category: category,
     tags: tags,
@@ -97,6 +128,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     // or 'content' in case you consume from API
 
     readingTime: remarkPluginFrontmatter?.readingTime,
+    toc: extractMarkdownHeadings(body),
   };
 };
 

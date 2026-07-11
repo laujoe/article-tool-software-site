@@ -1,120 +1,167 @@
 ---
-title: 'Terms and Conditions'
+title: '服务条款'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Last updated_: January 06, 2023
+_更新日期：2026年07月10日_
+_生效日期：2026年07月10日_
 
-Please read these terms and conditions carefully before using Our Service.
+欢迎使用 Article-Tool 及其官方网站、客户端、文档、下载渠道、技术支持和相关功能，以下统称“本服务”。本服务由 Article-Tool 项目方提供。您下载、安装、访问或使用本服务，即表示您已阅读、理解并同意遵守本服务条款，以及我们另行发布的隐私政策、付费说明、版本说明或补充规则。
 
-## Interpretation and Definitions
+若您不同意本条款，请停止访问网站、下载软件或继续使用相关功能。
 
-### Interpretation
+## 一、适用对象
 
-The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
+您应具备订立有效合同的资格。若您未达到所在地法律规定的完全民事行为能力年龄，应在监护人同意和指导下使用本服务。
 
-### Definitions
+若您代表学校、机构、团队、课题组或其他组织使用本服务，您确认您有权代表该组织接受本条款；此时“您”同时指该组织及其授权用户。
 
-For the purposes of these Terms and Conditions:
+## 二、服务内容
 
-- **Affiliate** means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
+Article-Tool 是一款面向研究者的本地优先学术资料与投稿管理软件，可能包括期刊库、稿件库、已刊论文库、学术会议、基金项目、日程、附件管理、备份、导出、AI 报告、个性化设置等功能。
 
-- **Country** refers to: California, United States
+具体功能以实际发布的版本、页面说明、更新日志、购买页面或软件内展示为准。我们可能持续改进、调整、暂停或下线部分功能，并会尽量避免对您的核心使用造成重大不利影响。
 
-- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to AstroWind LLC, 1 Cupertino, CA 95014.
+## 三、软件许可
 
-- **Device** means any device that can access the Service such as a computer, a cellphone or a digital tablet.
+在您遵守本条款并支付适用费用的前提下，我们授予您一项有限的、非独占的、不可转让、不可再许可、可撤销的软件使用许可，仅用于合法的个人研究、学习、写作、投稿管理或组织内部工作。
 
-- **Service** refers to the Website.
+除非法律强制允许或我们书面同意，您不得：
 
-- **Terms and Conditions** (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service. This Terms and Conditions agreement is a Demo.
+- 复制、出售、出租、转售、分发或公开传播本软件；
+- 破解、绕过授权、移除权利声明或规避技术限制；
+- 反编译、反向工程、修改、拆解或制作衍生版本；
+- 将本服务用于开发竞争性产品、训练替代产品或进行未经授权的商业分析；
+- 以任何损害本服务、其他用户或第三方权益的方式使用本服务。
 
-- **Third-party Social Media Service** means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.
+## 四、账号、授权与安全
 
-- **Website** refers to AstroWind, accessible from [https://astrowind.vercel.app](https://astrowind.vercel.app)
+若本服务提供账号、授权码、激活码、下载链接、设备授权或其他凭证，您应妥善保管并对其使用行为负责。
 
-- **You** means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
+如发现账号、授权码、密钥、设备或数据存在泄露、盗用、异常登录或其他安全风险，请及时联系我们。基于安全、合规或风控需要，我们可能要求验证身份、重置凭证、限制登录、暂停授权或采取其他必要措施。
 
-## Acknowledgment
+## 五、可接受使用规则
 
-These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.
+您不得利用本服务从事违法、侵权、欺诈、骚扰、攻击、恶意软件、网络入侵、垃圾信息、钓鱼、规避访问控制、侵犯隐私、破坏系统稳定性、冒用身份或其他损害我们、其他用户或第三方权益的行为。
 
-Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service.
+您也不得上传、处理、传播或管理您无权使用的论文、图片、音视频、数据、代码、商业秘密、个人信息或其他受保护内容。涉及学术论文、研究资料、第三方数据库或出版物时，您应自行确认版权、引用规范、使用许可和所在机构要求。
 
-By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.
+## 六、用户内容与本地数据
 
-You represent that you are over the age of 18\. The Company does not permit those under 18 to use the Service.
+您保留对自己输入、导入、创建、上传或管理的数据和内容的权利。Article-Tool 的核心定位是本地优先，您的本地资料通常由您自行保存和管理。
 
-Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Privacy Policy of the Company. Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service.
+为实现软件功能、维护服务、处理反馈、提供技术支持或履行您的指令，我们可能在必要范围内处理您主动提交给我们的信息。您应确保自己拥有处理这些内容所需的合法权利，并已取得必要授权、同意或许可。
 
-## Links to Other Websites
+请您根据自身需要定期备份重要资料。我们可能提供导出、迁移、备份或删除工具，但不保证所有数据都能在任何情况下以特定格式完整恢复或导出。
 
-Our Service may contain links to third-party web sites or services that are not owned or controlled by the Company.
+## 七、隐私与个人信息
 
-The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such web sites or services.
+我们会按照《隐私政策》说明收集、使用、保存、共享、转移和保护个人信息。
 
-We strongly advise You to read the terms and conditions and privacy policies of any third-party web sites or services that You visit.
+请不要向本服务提交超出使用目的所必需的敏感个人信息，除非相关功能明确需要且您已取得必要同意。若您代表组织管理员工、学生、合作方、受访者或其他个人的信息，您应确保具备合法处理依据，并负责向相关个人提供必要告知。
 
-## Termination
+我们会采取合理安全措施保护信息安全，但互联网、电子设备和软件系统不存在绝对安全。
 
-We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions.
+## 八、第三方服务
 
-Upon termination, Your right to use the Service will cease immediately.
+本服务可能涉及第三方登录、支付、存储、模型、开源组件、下载渠道、外部链接或其他第三方服务。第三方服务由相应第三方负责，并可能适用其独立条款和隐私政策。
 
-## Limitation of Liability
+因第三方服务的可用性、准确性、安全性、费用、数据处理方式或政策变化导致的问题，我们会在合理范围内协助处理，但不对第三方行为承担超出法律规定的责任。
 
-Notwithstanding any damages that You might incur, the entire liability of the Company and any of its suppliers under any provision of this Terms and Your exclusive remedy for all of the foregoing shall be limited to the amount actually paid by You through the Service or 100 USD if You haven't purchased anything through the Service.
+## 九、付费、试用与退款
 
-To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Service, third-party software and/or third-party hardware used with the Service, or otherwise in connection with any provision of this Terms), even if the Company or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose.
+部分功能、版本或服务可能需要付费。价格、授权范围、设备数量、试用期、优惠、税费、退款规则和售后方式，以购买页面、订单、应用商店规则、软件内说明或补充协议为准。
 
-Some states do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply. In these states, each party's liability will be limited to the greatest extent permitted by law.
+除法律另有规定、页面另有说明或我们书面同意外，已完成交付、授权或激活的费用通常不予退还。我们会尽量以清晰方式展示价格、功能范围、购买方式和售后说明。
 
-## "AS IS" and "AS AVAILABLE" Disclaimer
+试用、赠送额度、优惠券、折扣或促销活动可能附带资格、期限、数量、地区或功能限制。对于滥用优惠、虚假注册、批量转售或违反活动规则的行为，我们有权拒绝、撤销或调整相关权益。
 
-The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without limitation to the foregoing, the Company provides no warranty or undertaking, and makes no representation of any kind that the Service will meet Your requirements, achieve any intended results, be compatible or work with any other software, applications, systems or services, operate without interruption, meet any performance or reliability standards or be error free or that any errors or defects can or will be corrected.
+## 十、AI 与自动化功能
 
-Without limiting the foregoing, neither the Company nor any of the company's provider makes any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Service, or the information, content, and materials or products included thereon; (ii) that the Service will be uninterrupted or error-free; (iii) as to the accuracy, reliability, or currency of any information or content provided through the Service; or (iv) that the Service, its servers, the content, or e-mails sent from or on behalf of the Company are free of viruses, scripts, trojan horses, worms, malware, timebombs or other harmful components.
+若本服务包含 AI 报告、自动生成、推荐、识别、摘要、检索增强、分类、预测或其他自动化处理功能，相关输出可能存在不准确、不完整、过时、偏差或不适用于具体场景的情况。
 
-Some jurisdictions do not allow the exclusion of certain types of warranties or limitations on applicable statutory rights of a consumer, so some or all of the above exclusions and limitations may not apply to You. But in such a case the exclusions and limitations set forth in this section shall be applied to the greatest extent enforceable under applicable law.
+AI 输出仅供辅助参考，不构成法律、医疗、财务、投资、教育录取、就业、保险、信贷、出版审查或其他专业建议。您应自行审查输出内容，并对基于输出作出的判断、引用、投稿、发表或其他决定负责。
 
-## Governing Law
+您不得使用 AI 或自动化功能生成、处理或传播违法、侵权、欺诈、误导、冒充、恶意代码、深度伪造或违反平台规则的内容。
 
-The laws of the Country, excluding its conflicts of law rules, shall govern this Terms and Your use of the Service. Your use of the Application may also be subject to other local, state, national, or international laws.
+## 十一、专业内容与学术资料
 
-## Disputes Resolution
+Article-Tool 可能帮助您整理、检索、分析或生成与期刊、论文、会议、基金项目、引用、附件和研究资料相关的信息。
 
-If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.
+这些功能仅作为学术资料管理和工作流辅助，不替代人工判断、同行评审、导师意见、机构审查、期刊官方要求、基金指南或专业咨询。您应自行核验资料来源、版权状态、引用格式、投稿规范、收录情况、期刊政策和研究伦理要求。
 
-## For European Union (EU) Users
+## 十二、知识产权
 
-If You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which you are resident in.
+本服务及其软件、界面、商标、标识、文档、数据库结构、设计、文本、图片、音视频、代码和其他材料，除用户内容和第三方内容外，均由我们或相关权利人拥有。
 
-## United States Legal Compliance
+未经授权，您不得使用 Article-Tool 的名称、Logo、页面截图、宣传材料或其他品牌元素进行背书、广告、混淆性展示、商业推广或可能误导他人的使用。
 
-You represent and warrant that (i) You are not located in a country that is subject to the United States government embargo, or that has been designated by the United States government as a "terrorist supporting" country, and (ii) You are not listed on any United States government list of prohibited or restricted parties.
+若您向我们提交意见、建议、需求、问题报告、创意或改进方案，您同意我们可以在不侵犯您原始内容权利的前提下，将这些反馈用于产品改进、功能设计、问题修复和服务优化，而无需向您支付费用，除非双方另有书面约定。
 
-## Severability and Waiver
+## 十三、版权和侵权投诉
 
-### Severability
+若您认为本服务中的内容侵犯您的著作权、商标权、肖像权、名誉权、隐私权或其他合法权益，请通过网站公布的联系方式提交权利证明、侵权内容定位、联系方式、权利归属说明和真实性声明。
 
-If any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.
+我们将在收到合格通知后依法处理，包括要求补充材料、移除或限制相关内容、恢复内容、转送通知或终止重复侵权用户的相关权益。
 
-### Waiver
+## 十四、服务可用性与维护
 
-Except as provided herein, the failure to exercise a right or to require performance of an obligation under these Terms shall not effect a party's ability to exercise such right or require such performance at any time thereafter nor shall the waiver of a breach constitute a waiver of any subsequent breach.
+我们会努力保持服务稳定、安全和持续可用，但不保证服务不会中断、延迟、出错、丢失数据或完全满足您的需求。
 
-## Translation Interpretation
+服务可能因维护、升级、故障、网络、设备、第三方服务、不可抗力、攻击、监管要求或其他原因不可用。除另有书面服务等级协议外，我们不承诺特定可用率、响应时间或恢复时间。
 
-These Terms and Conditions may have been translated if We have made them available to You on our Service. You agree that the original English text shall prevail in the case of a dispute.
+## 十五、安全测试与漏洞披露
 
-## Changes to These Terms and Conditions
+未经我们书面授权，您不得对本服务进行渗透测试、压力测试、漏洞利用、社会工程、绕过权限、扫描受限接口或访问他人数据。
 
-We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material We will make reasonable efforts to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at Our sole discretion.
+若您善意发现安全漏洞，请通过网站公布的联系方式报告，并避免公开披露、利用漏洞、下载非必要数据或影响服务稳定。我们鼓励负责任披露，但不承诺支付奖励，除非另有漏洞奖励计划。
 
-By continuing to access or use Our Service after those revisions become effective, You agree to be bound by the revised terms. If You do not agree to the new terms, in whole or in part, please stop using the website and the Service.
+## 十六、账户暂停与终止
 
-## Contact Us
+若您违反本条款、拖欠费用、侵犯第三方权益、造成安全风险、触发合规要求、长期不活跃或损害我们及其他用户权益，我们可暂停、限制或终止您的账号、授权或部分功能。
 
-If you have any questions about these Terms and Conditions, You can contact us:
+账户或授权终止后，您仍应支付已产生费用，并继续受知识产权、保密、责任限制、争议解决及其他按性质应继续有效的条款约束。
 
-- By email: somecoolemail@domain.com
+## 十七、免责声明
+
+在法律允许的最大范围内，本服务按“现状”和“可用”提供。我们不作任何明示或默示保证，包括但不限于适销性、特定用途适用性、准确性、连续性、安全性、无错误、无病毒、不侵权或结果一定满足预期的保证。
+
+某些地区法律不允许排除特定保证的，该等排除仅在法律允许范围内适用。
+
+## 十八、责任限制
+
+在法律允许的最大范围内，我们及相关合作方不对任何间接、附带、特殊、惩罚性、后果性损害或利润损失、商誉损失、数据丢失、业务中断、替代服务成本承担责任。
+
+除法律另有强制规定外，我们对与本服务相关的全部责任总额，不超过您在争议发生前十二个月内就相关服务实际支付给我们的费用；若您未支付任何费用，则以法律允许的最低限度承担责任。因故意、重大过失、人身伤害或法律不得限制的责任，本条不适用。
+
+## 十九、用户赔偿
+
+若因您违反本条款、违法使用本服务、侵犯第三方权益、上传或处理非法内容、未取得必要授权，或您的用户、员工、承包商行为导致任何索赔、处罚、损失、费用或责任，您应在法律允许范围内赔偿并使我们免受损害，包括合理的调查处理费用和法律费用。
+
+## 二十、消费者权利保留
+
+本条款不排除、限制或影响您根据所在地强制性消费者保护法律享有的不可放弃权利。若本条款与强制性法律冲突，以强制性法律为准，但不影响其他条款的效力。
+
+## 二十一、条款变更
+
+我们可能不时更新本条款。若变更对您的权利义务产生重大影响，我们将通过网页公告、站内通知、邮件、客户端提示或其他合理方式通知您。
+
+变更生效后您继续使用本服务，即表示您接受更新后的条款。若您不同意变更，应停止使用本服务，并按适用规则取消订阅、停止使用或卸载软件。
+
+## 二十二、适用法律与争议解决
+
+因本条款或本服务产生的争议，双方应先通过友好协商解决；协商不成的，按照适用法律和有管辖权的争议解决机构处理。
+
+若您作为消费者使用本服务，本条款不影响您所在地强制性消费者保护法律赋予您的权利。
+
+## 二十三、通知与联系
+
+我们可通过网页公告、站内消息、电子邮件、客户端弹窗、系统通知或其他合理方式向您发送与本服务相关的通知。
+
+如您对本条款、本服务、账号、付款、隐私、版权投诉或安全问题有疑问，请通过网站联系我们页面、项目公告或我们正式公布的其他联系方式与我们联系。
+
+## 二十四、其他
+
+未经我们书面同意，您不得转让本条款项下的权利或义务。我们可因合并、分立、收购、资产转让、重组、融资、关联项目调整或法律要求转让本条款或相关权利义务，并将在法律要求范围内通知您。
+
+若本条款任何部分被认定无效、违法或不可执行，不影响其他部分继续有效。未行使或延迟行使任何权利不构成放弃。本条款及其引用的政策、订单、补充协议构成您与我们之间关于本服务的完整协议。

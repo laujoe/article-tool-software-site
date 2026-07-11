@@ -1,11 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-import Image from '~/components/common/Image.astro';
 import PostTags from '~/components/blog/Tags.astro';
-import SocialShare from '~/components/common/SocialShare.astro';
 
-import { getPermalink } from '~/utils/permalinks';
+import { getBlogPermalink, getPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
 
 import type { Post } from '~/types';
@@ -15,90 +13,510 @@ export interface Props {
   url: string | URL;
 }
 
-const { post, url } = Astro.props;
+const { post } = Astro.props;
+
+const readingLabel = post.readingTime ? `约 ${post.readingTime} 分钟` : '长文阅读';
+let chapter = 0;
+const tocEntries = (post.toc || []).map((item) => ({
+  ...item,
+  chapter: item.level === 2 ? (chapter += 1) : undefined,
+}));
+const hasToc = tocEntries.length > 0;
 ---
 
-<section class="py-8 sm:py-16 lg:py-20 mx-auto">
-  <article>
-    <header
-      class={post.image
-        ? 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-        : 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'}
+<article id="article-top">
+  <section
+    class="relative overflow-hidden border-b border-slate-200 bg-[#f7fafc] dark:border-slate-800 dark:bg-slate-950"
+  >
+    <div class="article-hero-grid pointer-events-none absolute inset-0"></div>
+    <div
+      class="relative mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-end lg:py-16"
     >
-      <div class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
-        <p>
-          <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-          <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
-          {
-            post.author && (
-              <>
-                {' '}
-                · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-                <span class="inline-block">{post.author}</span>
-              </>
-            )
-          }
+      <header
+        class="max-w-4xl intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+      >
+        <div class="mb-5 flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+          <a
+            href={getBlogPermalink()}
+            class="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-3 py-1.5 font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:text-blue-200"
+          >
+            <Icon name="tabler:arrow-left" class="size-4" />
+            博客清单
+          </a>
           {
             post.category && (
-              <>
-                {' '}
-                ·{' '}
-                <a class="hover:underline inline-block" href={getPermalink(post.category.slug, 'category')}>
-                  {post.category.title}
-                </a>
-              </>
+              <a
+                href={getPermalink(post.category.slug, 'category')}
+                class="inline-flex items-center rounded-md bg-blue-50 px-3 py-1.5 font-semibold text-blue-700 ring-1 ring-blue-100 transition hover:bg-blue-100 dark:bg-blue-500/15 dark:text-blue-200 dark:ring-blue-500/20"
+              >
+                {post.category.title}
+              </a>
             )
           }
+          <span
+            class="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-3 py-1.5 font-semibold text-emerald-700 ring-1 ring-emerald-100 dark:bg-emerald-500/15 dark:text-emerald-200 dark:ring-emerald-500/20"
+          >
+            <Icon name="tabler:book-2" class="size-4" />
+            Article-Tool 文档
+          </span>
+        </div>
+
+        <h1
+          class="text-4xl font-bold leading-tight tracking-normal text-slate-950 dark:text-white md:text-5xl lg:text-[3.6rem]"
+        >
+          {post.title}
+        </h1>
+
+        {
+          post.excerpt && (
+            <div class="mt-6 max-w-3xl rounded-md border border-slate-200 bg-white/80 p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900/80">
+              <p class="border-l-4 border-blue-600 pl-5 text-lg leading-8 text-slate-600 dark:border-blue-300 dark:text-slate-300 md:text-xl">
+                {post.excerpt}
+              </p>
+            </div>
+          )
+        }
+
+        <div class="mt-7 flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-300">
+          <span
+            class="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-700"
+          >
+            <Icon name="tabler:calendar" class="size-4 text-blue-700 dark:text-blue-300" />
+            <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate)}</time>
+          </span>
           {
-            post.readingTime && (
-              <>
-                &nbsp;· <span>{post.readingTime}</span> min read
-              </>
+            post.author && (
+              <span class="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-700">
+                <Icon name="tabler:user" class="size-4 text-blue-700 dark:text-blue-300" />
+                {post.author}
+              </span>
             )
           }
-        </p>
-      </div>
+          <span
+            class="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-700"
+          >
+            <Icon name="tabler:clock-hour-4" class="size-4 text-blue-700 dark:text-blue-300" />
+            {readingLabel}
+          </span>
+        </div>
+      </header>
 
-      <h1
-        class="px-4 sm:px-6 max-w-3xl mx-auto text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading"
-      >
-        {post.title}
-      </h1>
-      <p
-        class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-justify"
-      >
-        {post.excerpt}
-      </p>
+      {!hasToc && <div class="hidden lg:block" />}
+    </div>
+  </section>
 
+  <section class="bg-[#f8fafc] py-10 dark:bg-slate-950 lg:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
       {
-        post.image ? (
-          <Image
-            src={post.image}
-            class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post?.excerpt || ''}
-            width={900}
-            height={506}
-            format="webp"
-            loading="eager"
-            decoding="async"
-          />
-        ) : (
-          <div class="max-w-3xl mx-auto px-4 sm:px-6">
-            <div class="border-t dark:border-slate-700" />
-          </div>
+        hasToc && (
+          <details
+            id="article-toc-mobile"
+            class="mb-8 rounded-md border border-slate-200 bg-slate-50 p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 lg:hidden"
+          >
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-base font-bold text-slate-950 dark:text-white">
+              <span class="flex items-center gap-2">
+                <span class="flex size-9 items-center justify-center rounded-md bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-200">
+                  <Icon name="tabler:list-search" class="size-5" />
+                </span>
+                本文目录
+              </span>
+              <Icon name="tabler:chevron-down" class="size-5 text-slate-400" />
+            </summary>
+            <nav class="mt-4 space-y-1">
+              {tocEntries.map((item) => (
+                <a href={`#${item.slug}`} class={`article-toc-link article-toc-link--h${item.level}`}>
+                  <span class="article-toc-marker">
+                    {item.level === 2 && item.chapter ? String(item.chapter).padStart(2, '0') : ''}
+                  </span>
+                  <span class="article-toc-text">{item.text}</span>
+                </a>
+              ))}
+            </nav>
+          </details>
         )
       }
-    </header>
-    <div
-      class="mx-auto px-6 sm:px-6 max-w-3xl prose prose-md lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg mt-8 prose-headings:scroll-mt-[80px] prose-li:my-0"
-    >
-      <slot />
+
+      <div class="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(18.5rem,1fr)] lg:items-start">
+        <main class="min-w-0">
+          <div
+            id="post-content"
+            class="article-prose prose prose-md w-full max-w-none dark:prose-invert prose-headings:font-heading prose-headings:font-bold prose-headings:leading-tight prose-headings:tracking-normal prose-headings:scroll-mt-[96px] prose-a:text-primary prose-img:rounded-md prose-img:shadow-lg prose-li:my-0 dark:prose-headings:text-slate-100 dark:prose-a:text-blue-400 lg:prose-xl"
+          >
+            <slot />
+          </div>
+
+          <div class="mt-10 border-t border-slate-200 pt-6 dark:border-slate-700">
+            <PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
+          </div>
+        </main>
+
+        {
+          hasToc && (
+            <aside id="article-toc" class="hidden lg:block" aria-label="文章目录">
+              <div class="article-toc-panel overflow-hidden rounded-md border border-slate-200 bg-white shadow-lg shadow-slate-200/60 dark:border-slate-700 dark:bg-slate-900 dark:shadow-none">
+                <div class="border-b border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/70">
+                  <div class="flex items-center gap-3">
+                    <span class="flex size-10 items-center justify-center rounded-md bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-200">
+                      <Icon name="tabler:list-search" class="size-5" />
+                    </span>
+                    <div>
+                      <p class="text-sm font-bold text-slate-950 dark:text-white">本文目录</p>
+                      <p id="article-toc-count" class="text-xs text-slate-500 dark:text-slate-400">
+                        {tocEntries.length} 个章节 · {readingLabel}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+                    <div
+                      id="article-progress-bar"
+                      class="h-full w-0 rounded-full bg-blue-700 transition-[width] duration-150 dark:bg-blue-300"
+                    />
+                  </div>
+                  <div class="mt-3 flex items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+                    <span>阅读进度</span>
+                    <span id="article-progress-text" class="font-bold text-blue-700 dark:text-blue-300">
+                      0%
+                    </span>
+                  </div>
+                  <div class="mt-4 rounded-md bg-white p-3 ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-700">
+                    <p class="text-xs text-slate-500 dark:text-slate-400">当前位置</p>
+                    <p
+                      id="article-current-heading"
+                      class="mt-1 text-sm font-bold leading-5 text-slate-950 dark:text-white"
+                    >
+                      {tocEntries[0]?.text || '即将开始阅读'}
+                    </p>
+                  </div>
+                </div>
+                <nav class="article-toc-scroll space-y-1 overflow-auto p-3">
+                  {tocEntries.map((item) => (
+                    <a href={`#${item.slug}`} class={`article-toc-link article-toc-link--h${item.level}`}>
+                      <span class="article-toc-marker">
+                        {item.level === 2 && item.chapter ? String(item.chapter).padStart(2, '0') : ''}
+                      </span>
+                      <span class="article-toc-text">{item.text}</span>
+                    </a>
+                  ))}
+                </nav>
+                <div class="grid grid-cols-2 gap-2 border-t border-slate-200 p-3 dark:border-slate-700">
+                  <a
+                    href={getBlogPermalink()}
+                    class="inline-flex items-center justify-center gap-1 rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-500/50 dark:hover:text-blue-200"
+                  >
+                    <Icon name="tabler:layout-list" class="size-4" />
+                    清单
+                  </a>
+                  <button
+                    type="button"
+                    data-article-top-trigger
+                    class="inline-flex items-center justify-center gap-1 rounded-md bg-blue-700 px-3 py-2 text-sm font-semibold text-white transition hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500"
+                  >
+                    <Icon name="tabler:arrow-up" class="size-4" />
+                    顶部
+                  </button>
+                </div>
+              </div>
+            </aside>
+          )
+        }
+      </div>
     </div>
-    <div class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row">
-      <PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
-      <SocialShare url={url} text={post.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" />
-    </div>
-  </article>
-</section>
+  </section>
+</article>
+
+<button
+  id="article-back-to-top"
+  type="button"
+  aria-label="回到页面顶部"
+  class="fixed bottom-6 right-5 z-40 flex size-11 translate-y-3 items-center justify-center rounded-md border border-slate-200 bg-white/95 text-blue-700 opacity-0 shadow-lg shadow-slate-200/70 backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-blue-100 dark:border-slate-700 dark:bg-slate-900/95 dark:text-blue-200 dark:shadow-none dark:hover:border-blue-500/50 dark:hover:bg-blue-500/10 dark:focus:ring-blue-500/20 lg:hidden"
+>
+  <Icon name="tabler:arrow-up" class="size-5" />
+</button>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .article-hero-grid {
+    background-image:
+      linear-gradient(rgb(15 23 42 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(15 23 42 / 0.045) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.95), transparent 76%);
+  }
+
+  #article-back-to-top {
+    pointer-events: none;
+  }
+
+  #article-back-to-top[data-visible] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .article-toc-panel {
+    --article-toc-available-height: calc(100vh - 11.75rem);
+    display: flex;
+    flex-direction: column;
+    height: min(calc(100vh - 11.75rem), var(--article-toc-available-height));
+    max-height: min(calc(100vh - 11.75rem), var(--article-toc-available-height));
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease,
+      height 160ms ease,
+      max-height 160ms ease;
+  }
+
+  .article-toc-panel[data-near-footer] {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(0.75rem);
+  }
+
+  .article-toc-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overscroll-behavior: contain;
+  }
+
+  .article-prose {
+    color: rgb(51 65 85);
+    max-width: none;
+  }
+
+  .article-prose :where(p) {
+    color: rgb(51 65 85);
+    font-size: 1.12rem;
+    line-height: 2.05;
+    margin-top: 1.1rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .article-prose :where(li) {
+    color: rgb(51 65 85);
+    font-size: 1.08rem;
+    line-height: 1.9;
+    padding-left: 0.15rem;
+  }
+
+  .article-prose :where(h2) {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    border-top: 1px solid rgb(226 232 240);
+    color: rgb(15 23 42);
+    font-size: 2.15rem;
+    line-height: 1.35;
+    margin-top: 3.8rem;
+    margin-bottom: 1.35rem;
+    padding-top: 1.75rem;
+  }
+
+  .article-prose :where(h2)::before {
+    content: '';
+    display: inline-block;
+    width: 0.55rem;
+    height: 1.9rem;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: rgb(37 99 235);
+    margin-top: 0.25rem;
+    box-shadow: 0 0 0 0.35rem rgb(219 234 254);
+  }
+
+  .article-prose :where(h3) {
+    color: rgb(30 41 59);
+    font-size: 1.5rem;
+    line-height: 1.45;
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    padding-left: 1rem;
+    border-left: 3px solid rgb(147 197 253);
+  }
+
+  .article-prose :where(a) {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .article-prose :where(img) {
+    border: 1px solid rgb(226 232 240);
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 22px 46px rgb(15 23 42 / 0.12);
+    margin-top: 2rem;
+  }
+
+  .article-prose :where(center) {
+    color: rgb(100 116 139);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-top: -0.4rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .article-prose :where(blockquote) {
+    border-left-color: rgb(37 99 235);
+    background: rgb(239 246 255);
+    border-radius: 0 6px 6px 0;
+    color: rgb(30 64 175);
+    padding: 1rem 1.2rem;
+  }
+
+  .article-toc-link {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: 0.55rem;
+    align-items: start;
+    border-left: 2px solid transparent;
+    border-radius: 6px;
+    color: rgb(71 85 105);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    padding: 0.5rem 0.65rem;
+    text-decoration: none;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .article-toc-link:hover,
+  .article-toc-link[data-active] {
+    background: rgb(239 246 255);
+    border-left-color: rgb(37 99 235);
+    color: rgb(29 78 216);
+    transform: translateX(2px);
+  }
+
+  .article-toc-link:focus-visible {
+    outline: 2px solid rgb(37 99 235);
+    outline-offset: 2px;
+  }
+
+  .article-toc-link--h3 {
+    grid-template-columns: 1rem minmax(0, 1fr);
+    color: rgb(100 116 139);
+    font-size: 0.84rem;
+    padding-left: 1.25rem;
+  }
+
+  .article-toc-marker {
+    color: rgb(37 99 235);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+  }
+
+  .article-toc-link--h3 .article-toc-marker::before {
+    content: '';
+    display: inline-block;
+    width: 0.36rem;
+    height: 0.36rem;
+    border-radius: 999px;
+    background: rgb(148 163 184);
+    vertical-align: middle;
+  }
+
+  .article-toc-text {
+    min-width: 0;
+  }
+
+  .dark .article-toc-link {
+    color: rgb(203 213 225);
+  }
+
+  .dark .article-toc-link--h3 {
+    color: rgb(148 163 184);
+  }
+
+  .dark .article-toc-marker {
+    color: rgb(147 197 253);
+  }
+
+  .dark .article-toc-link--h3 .article-toc-marker::before {
+    background: rgb(100 116 139);
+  }
+
+  .dark .article-toc-link:hover,
+  .dark .article-toc-link[data-active] {
+    background: rgb(37 99 235 / 0.14);
+    border-left-color: rgb(147 197 253);
+    color: rgb(191 219 254);
+  }
+
+  .dark .article-hero-grid {
+    background-image:
+      linear-gradient(rgb(148 163 184 / 0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(148 163 184 / 0.09) 1px, transparent 1px);
+  }
+
+  .dark .article-prose {
+    color: rgb(203 213 225);
+  }
+
+  .dark .article-prose :where(p),
+  .dark .article-prose :where(li) {
+    color: rgb(203 213 225);
+  }
+
+  .dark .article-prose :where(h2) {
+    border-top-color: rgb(51 65 85);
+    color: white;
+  }
+
+  .dark .article-prose :where(h2)::before {
+    background: rgb(147 197 253);
+    box-shadow: 0 0 0 0.35rem rgb(37 99 235 / 0.22);
+  }
+
+  .dark .article-prose :where(h3) {
+    border-left-color: rgb(96 165 250);
+    color: rgb(226 232 240);
+  }
+
+  .dark .article-prose :where(img) {
+    border-color: rgb(51 65 85);
+    background: rgb(15 23 42);
+    box-shadow: none;
+  }
+
+  .dark .article-prose :where(center) {
+    color: rgb(148 163 184);
+  }
+
+  .dark .article-prose :where(blockquote) {
+    background: rgb(37 99 235 / 0.12);
+    color: rgb(191 219 254);
+  }
+
+  @media (max-width: 767px) {
+    .article-prose :where(p) {
+      font-size: 1.05rem;
+      line-height: 1.95;
+    }
+
+    .article-prose :where(h2) {
+      font-size: 1.75rem;
+      margin-top: 3rem;
+    }
+
+    .article-prose :where(h3) {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .article-toc-panel {
+      position: fixed;
+      top: 8.75rem;
+      right: max(1.5rem, calc((100vw - 80rem) / 2 + 1.5rem));
+      z-index: 20;
+      width: min(18.5rem, calc((100vw - 5rem) / 4));
+    }
+  }
+</style>

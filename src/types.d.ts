@@ -30,6 +30,15 @@ export interface Post {
 
   /** Estimated reading time in minutes. */
   readingTime?: number;
+
+  /** Headings extracted from the post body for table-of-contents rendering. */
+  toc?: PostHeading[];
+}
+
+export interface PostHeading {
+  level: 2 | 3;
+  text: string;
+  slug: string;
 }
 
 export interface Taxonomy {

@@ -1,0 +1,25 @@
+{
+  "product": "Article-Tool",
+  "version": "1.6",
+  "latestVersion": "1.6",
+  "title": "Article-Tool 1.6",
+  "releaseDate": "2026-07-10",
+  "channelLabel": "下载版本",
+  "publicDownloadVersion": "1.6",
+  "notes": ["修复各种影响使用体验的BUG。", "在主菜单增加「基金项目」功能，支持新建基金项目。"],
+  "downloads": {
+    "夸克网盘": "https://pan.quark.cn/s/c9cfea2cde63?pwd=G6sE",
+    "百度网盘": "https://pan.baidu.com/s/1JqpgmT9Wpub-Bl-Bhh27uQ?pwd=x44v"
+  },
+  "downloadOptions": [
+    { "label": "夸克网盘", "url": "https://pan.quark.cn/s/c9cfea2cde63?pwd=G6sE" },
+    { "label": "百度网盘", "url": "https://pan.baidu.com/s/1JqpgmT9Wpub-Bl-Bhh27uQ?pwd=x44v" }
+  ],
+  "downloadUrl": "https://pan.baidu.com/s/1JqpgmT9Wpub-Bl-Bhh27uQ?pwd=x44v",
+  "macUrl": "",
+  "winUrl": "",
+  "pageUrl": "https://articletool.laujoe.top",
+  "releaseNotesUrl": "https://articletool.laujoe.top/services",
+  "changelogUrl": "https://articletool.laujoe.top/article-tool/changelog-data.json",
+  "force": false
+}

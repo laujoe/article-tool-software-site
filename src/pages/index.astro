@@ -9,11 +9,10 @@ import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'Article-Tool — 本地优先的学术投稿与研究资料工作台',
   ignoreTitleTemplate: true,
 };
 ---
@@ -25,77 +24,99 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
+        text: '下载软件',
+        href: 'https://pan.baidu.com/s/1JqpgmT9Wpub-Bl-Bhh27uQ?pwd=x44v',
         target: '_blank',
         icon: 'tabler:download',
       },
-      { text: 'Learn more', href: '#features' },
     ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
+    image={{ src: '~/assets/images/软件主页面.jpg', alt: 'Article-Tool 软件主页面截图' }}
   >
     <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro v6</span> + Tailwind CSS
+      <span class="block">Article-Tool</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro v6 +
-        Tailwind CSS v4.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages & Blogs.
+      <span class="block text-lg leading-8 text-slate-600 dark:text-slate-300 md:text-xl">
+        为解决复杂而细碎的学术管理需求而设计的
+        <span class="font-semibold text-accent dark:text-blue-200">本地化软件</span>。
+      </span>
+      <span class="mt-4 block text-base leading-7 text-slate-600 dark:text-slate-300 md:text-lg">
+        它不是简单的期刊表格，也不是单纯的待办清单，而是把
+        <span class="font-semibold text-gray-950 dark:text-white"
+          >期刊库、稿件库、已刊论文库、学术会议、基金项目、日程、AI 报告、附件、备份、个性化设置</span
+        >
+        等能力整合在一起的综合工作台。
+      </span>
+      <span class="mt-4 block text-base leading-7 text-slate-600 dark:text-slate-300 md:text-lg">
+        它以研究者的实际工作流为中心，将
+        <span class="font-semibold text-accent dark:text-blue-200">选题、写作、投稿、审稿、转投、发表、归档、复盘</span>
+        纳入同一个系统，让学术生产过程变得更加清晰、连续和可追踪。
+      </span>
     </Fragment>
   </Hero>
 
   <!-- Note Widget ******************* -->
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+  <Note title="限时优惠:" description="Article-Tool 买断早鸟价 39.9 元，1.7.0 版本后计划恢复至 69.9 元。" />
 
   <!-- Features Widget *************** -->
 
   <Features
     id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023, 2024 and 2025."
+    tagline="六大亮点"
+    title="软件功能"
+    subtitle="围绕研究者从选题、写作、投稿到发表归档的真实流程，把分散的信息、任务和资料收束到同一个本地工作台。"
     items={[
       {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility. Now powered by Tailwind CSS v4.',
-        icon: 'tabler:brand-tailwind',
+        title: '日程系统',
+        description: `
+          <span class="block">日程系统是软件的时间管理中心，以月历视图展示任务，并在工作区显示选中日期的具体任务列表。</span>
+          <span class="mt-2 block">你可以直接为某一天添加任务，也可以从期刊、稿件、已刊论文、学术会议或基金项目详情页创建关联事项。</span>
+        `,
+        icon: 'tabler:calendar-event',
       },
       {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS v4 ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
+        title: '期刊库',
+        description: `
+          <span class="block">期刊库用于保存、整理、评估和筛选可投期刊，是投稿决策前最重要的资料库之一。</span>
+          <span class="mt-2 block">默认字段覆盖主办单位、投稿情况、刊物级别、收录情况、研究方向、刊物评价、刊期、相关链接和投稿难度等信息。</span>
+        `,
+        icon: 'tabler:books',
       },
       {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
+        title: '稿件库',
+        description: `
+          <span class="block">稿件库用于管理正在构思、写作、打磨、待投稿、投稿中或已发表的论文。</span>
+          <span class="mt-2 block">稿件详情页分为稿件属性、投稿建议、投稿流程和内容块，分别处理结构化字段、期刊匹配、投稿记录和写作资料。</span>
+          <span class="mt-2 block">正文资料、写作计划、摘要、修改意见和参考线索都可以围绕同一篇稿件沉淀下来。</span>
+        `,
+        icon: 'tabler:file-pencil',
       },
       {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
+        title: '已刊论文库',
+        description: `
+          <span class="block">已刊论文库用于管理已经发表、待见刊、校样或已收录的论文，不只是一个普通成果表。</span>
+          <span class="mt-2 block">它既保存「见刊属性」，也可以保留「稿件属性」。稿件转入已刊论文库时，系统会创建原稿快照。</span>
+          <span class="mt-2 block">论文发表后，你仍然可以追溯写作阶段的关键词、目标刊物、优先级、字数、流程记录和内容块。</span>
+        `,
+        icon: 'tabler:archive',
       },
       {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
+        title: '学术会议',
+        description: `
+          <span class="block">学术会议模块用于记录你参与过的会议、论坛、报告和学术交流活动。</span>
+          <span class="mt-2 block">它可以与期刊库、稿件库、已刊论文库等对象联动，让会议经历不再散落在零碎笔记里。</span>
+        `,
+        icon: 'tabler:presentation',
       },
       {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
+        title: '基金项目',
+        description: `
+          <span class="block">基金项目模块可以与其他系统联动，集中管理项目从申报到成果归集的全过程。</span>
+          <span class="mt-2 block">内置申报记录、立项信息、经费管理、进度节点、成果归集等分页面，帮助你完整记录项目情况。</span>
+        `,
+        icon: 'tabler:building-bank',
       },
     ]}
   />
@@ -104,33 +125,38 @@ const metadata = {
 
   <Content
     isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
+    tagline="贴合投稿判断的期刊库"
+    title="把零散期刊信息整理成可比较、可追踪、可复用的投稿资产"
     items={[
       {
-        title: 'Built on top of Astro v6',
+        title: '结构化期刊档案',
         description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
+          '用自定义字段记录主办单位、刊物级别、收录情况、研究方向、刊期、链接、投稿难度与个人评价，让每一本期刊都有清楚的资料卡。',
+        icon: 'tabler:book-2',
       },
       {
-        title: 'Styled using Tailwind CSS v4',
+        title: '关联投稿记录',
         description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
+          '所有投向该期刊的稿件、审稿状态、返修记录与转投路径都会自动汇总，方便你回看历史经验，不再重复踩坑。',
+        icon: 'tabler:history',
       },
       {
-        title: 'Cross-browser compatibility',
+        title: '投稿适配分析',
         description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
+          '结合本地记录和 AI 建议，分析期刊偏好、选题匹配度和潜在风险，帮助你更快判断一篇稿件是否值得投向这里。',
+        icon: 'tabler:target-arrow',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
+      src: '~/assets/images/期刊库 某对象.jpg',
+      alt: 'Article-Tool 期刊库详情页面截图',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">期刊库详情页</h3>
+      <p class="text-muted dark:text-slate-400">
+        围绕一本期刊整理投稿判断所需的全部材料，把刊物属性、研究方向、投稿经验和个人评价放在同一个上下文里。
+      </p>
     </Fragment>
 
     <Fragment slot="bg">
@@ -144,31 +170,34 @@ const metadata = {
     isAfterContent
     items={[
       {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
+        title: '稿件属性',
+        description:
+          '记录题目、关键词、研究方向、优先级、字数、状态、目标刊物等核心信息，让每一篇论文都有稳定、可回看的资料页。',
+        icon: 'tabler:file-description',
       },
       {
-        title: 'Multiple layout possibilities',
+        title: '投稿建议',
         description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
+          '结合期刊库资料、本地经验和 AI 辅助分析，为稿件筛选可投方向，帮助你比较适配度、投稿风险和备选路径。',
+        icon: 'tabler:target-arrow',
       },
       {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
+        title: '投稿流程',
+        description: '把投稿、退稿、返修、转投、录用等关键节点按时间线记录下来，让一次投稿经历可以被追踪、复盘和复用。',
+        icon: 'tabler:route',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
+      src: '~/assets/images/稿件库 某对象.jpg',
+      alt: 'Article-Tool 稿件库详情页面截图',
     }}
   >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">稿件库详情页</h3>
+      <p class="text-muted dark:text-slate-400">
+        围绕一篇论文组织全部材料，把构思、写作、投稿和修改过程放在同一个上下文里。
+      </p>
+    </Fragment>
 
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
@@ -182,31 +211,37 @@ const metadata = {
     isAfterContent
     items={[
       {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
+        title: '见刊属性',
+        description: '记录刊物、卷期、页码、DOI、收录情况、见刊时间等发表信息，形成稳定的成果档案。',
+        icon: 'tabler:archive',
       },
       {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
+        title: '稿件属性',
+        description: '从稿件库转入已刊论文库时保留原稿快照，发表之后仍然可以回看当时的关键词、目标刊物和修改线索。',
+        icon: 'tabler:file-description',
       },
       {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
+        title: '成果归档',
+        description: '把附件、校样、发表链接、复盘记录与后续成果关联起来，让论文不再发表后就失去上下文。',
+        icon: 'tabler:folders',
       },
       {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
+        title: '长期复盘',
+        description: '沉淀不同期刊、选题和投稿策略的结果，帮助你在下一次投稿前更快判断方向。',
+        icon: 'tabler:history',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
+      src: '~/assets/images/已刊论文库 某对象.jpg',
+      alt: 'Article-Tool 已刊论文库详情页面截图',
     }}
   >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">已刊论文库详情页</h3>
+      <p class="text-muted dark:text-slate-400">
+        发表不是资料管理的终点，Article-Tool 会把成果信息和写作投稿阶段的上下文继续保留下来。
+      </p>
+    </Fragment>
 
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
@@ -216,93 +251,167 @@ const metadata = {
   <!-- Steps Widget ****************** -->
 
   <Steps
-    title="Get your dream website up and running in no time with AstroWind."
+    id="workflow"
+    tagline="工作流"
+    title="从选题到归档，把学术生产过程连成一条线"
+    subtitle="Article-Tool 的重点不是让你多填表，而是让每一次判断、投稿、修改和发表都有位置可放、有线索可查。"
     items={[
       {
-        title: 'Step 1: <span class="font-medium">Download</span>',
+        title: '对象底座',
         description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
+          '期刊库、稿件库、已刊论文库、学术会议和基金项目共同构成资料底座，让研究对象不再散落在表格、文件夹和聊天记录里。',
+        icon: 'tabler:database',
       },
       {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
+        title: '稿件主线',
+        description: '围绕一篇稿件记录选题、写作、选刊、投稿、审稿、转投和发表，把关键判断放回同一个上下文。',
+        icon: 'tabler:file-pencil',
       },
       {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
+        title: '节点调度',
+        description: '审稿期限、返修计划、会议日期、基金节点都能进入日程系统，重要事项不再只停留在脑子里。',
+        icon: 'tabler:calendar-event',
       },
       {
-        title: 'Ready!',
-        icon: 'tabler:check',
+        title: '成果沉淀',
+        description: '发表信息、原稿快照、附件、会议反馈、项目成果和复盘记录都能沉淀下来，为下一次选题与投稿提供经验。',
+        icon: 'tabler:archive',
       },
     ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
+  >
+    <Fragment slot="image">
+      <div
+        class="overflow-hidden rounded-md border border-slate-200 bg-white shadow-lg shadow-slate-200/70 dark:border-slate-700 dark:bg-slate-900 dark:shadow-none"
+      >
+        <div class="border-b border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-700 dark:bg-slate-800/70">
+          <p class="text-sm font-semibold uppercase tracking-wide text-accent dark:text-blue-300">
+            Article-Tool Workflow
+          </p>
+          <h3 class="mt-1 text-xl font-bold text-slate-950 dark:text-white">软件工作流</h3>
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+            将选题、写作、投稿、审稿、转投、发表、归档、复盘等过程纳入同一个系统中，让学术生产过程变得更加清晰、连续和可追踪。
+          </p>
+        </div>
+
+        <div class="px-5 py-5">
+          <div class="space-y-3">
+            {
+              [
+                ['01', '选题 / 立项', '从想法、会议反馈或基金任务中形成可推进题目', ['稿件库', '学术会议', '基金项目']],
+                ['02', '写作 / 材料', '把提纲、摘要、正文资料和附件沉淀到同一篇稿件下', ['稿件库', '附件']],
+                ['03', '选刊 / 投稿', '用期刊库判断适配度，记录目标刊物与提交动作', ['期刊库', '投稿流程']],
+                ['04', '审稿 / 返修', '把审稿意见、修改计划和转投记录放回时间线', ['稿件库', '日程']],
+                ['05', '会议 / 交流', '记录参会、报告、反馈和可能转化为论文的线索', ['学术会议', '日程']],
+                ['06', '基金 / 项目', '管理申报、立项、进度节点与成果归集', ['基金项目', '日程']],
+                ['07', '发表 / 归档', '保留发表信息、原稿快照、附件和复盘经验', ['已刊论文库', '备份']],
+              ].map(([step, title, detail, modules], index, list) => (
+                <div class="relative flex gap-3">
+                  {index !== list.length - 1 && (
+                    <div class="absolute left-5 top-10 h-[calc(100%-1.25rem)] w-px bg-slate-200 dark:bg-slate-700" />
+                  )}
+                  <div class="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-xs font-bold text-blue-700 dark:border-blue-500/40 dark:bg-blue-500/15 dark:text-blue-200">
+                    {step}
+                  </div>
+                  <div class="min-w-0 flex-1 rounded-md border border-slate-200 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-950/40">
+                    <div class="flex flex-wrap items-baseline justify-between gap-2">
+                      <p class="font-semibold text-slate-950 dark:text-white">{title}</p>
+                      <p class="text-xs text-slate-500 dark:text-slate-400">可追踪</p>
+                    </div>
+                    <p class="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{detail}</p>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                      {(modules as string[]).map((module) => (
+                        <span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
+                          {module}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          <div
+            class="mt-5 grid grid-cols-2 overflow-hidden rounded-md border border-slate-200 text-center dark:border-slate-700 sm:grid-cols-4"
+          >
+            <div
+              class="border-r border-b border-slate-200 bg-slate-50 px-3 py-3 dark:border-slate-700 dark:bg-slate-800/60 sm:border-b-0"
+            >
+              <p class="text-xs text-slate-500 dark:text-slate-400">核心对象</p>
+              <p class="mt-1 text-sm font-semibold text-slate-900 dark:text-white">稿件库</p>
+            </div>
+            <div
+              class="border-b border-slate-200 bg-slate-50 px-3 py-3 dark:border-slate-700 dark:bg-slate-800/60 sm:border-r sm:border-b-0"
+            >
+              <p class="text-xs text-slate-500 dark:text-slate-400">判断依据</p>
+              <p class="mt-1 text-sm font-semibold text-slate-900 dark:text-white">期刊库</p>
+            </div>
+            <div class="border-r border-slate-200 bg-slate-50 px-3 py-3 dark:border-slate-700 dark:bg-slate-800/60">
+              <p class="text-xs text-slate-500 dark:text-slate-400">外部节点</p>
+              <p class="mt-1 text-sm font-semibold text-slate-900 dark:text-white">会议 / 基金</p>
+            </div>
+            <div class="bg-slate-50 px-3 py-3 dark:bg-slate-800/60">
+              <p class="text-xs text-slate-500 dark:text-slate-400">成果沉淀</p>
+              <p class="mt-1 text-sm font-semibold text-slate-900 dark:text-white">已刊论文库</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  </Steps>
 
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS v4"
-    tagline="Components"
+    id="details"
+    title="贴心、方便而专注，也足够自定义"
+    subtitle="它不是为了堆功能，而是把研究者长期会遇到的细碎需求收纳好：少切换、少遗忘、少重复，让资料管理真正服务写作和投稿。"
+    tagline="细节能力"
     items={[
       {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
+        title: '本地优先',
+        description: '核心资料保存在自己的电脑中，适合管理尚未发表的选题、稿件、附件和投稿记录。',
+        icon: 'tabler:shield-lock',
       },
       {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
+        title: '字段可配置',
+        description: '期刊、稿件、成果、会议和基金项目都可以围绕你的习惯调整字段、分类和记录方式。',
+        icon: 'tabler:adjustments-horizontal',
       },
       {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
+        title: '对象可关联',
+        description: '期刊、稿件、日程、附件、会议和项目之间可以互相关联，减少重复录入。',
+        icon: 'tabler:link',
       },
       {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
+        title: 'AI 报告',
+        description: '在需要判断投稿方向、整理材料或复盘记录时，用 AI 辅助生成更清晰的分析结果。',
+        icon: 'tabler:report-analytics',
       },
       {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
+        title: '附件沉淀',
+        description: '把投稿文件、修改稿、校样、通知邮件、会议资料等附件留在相关对象旁边。',
+        icon: 'tabler:paperclip',
       },
       {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
+        title: '备份迁移',
+        description: '为长期资料管理保留备份意识，降低换电脑、重装系统或版本升级时的资料焦虑。',
+        icon: 'tabler:copy-check',
       },
       {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
+        title: '日程联动',
+        description: '重要日期可以从对象详情页进入日程系统，写作计划和投稿节点都能回到月历中查看。',
+        icon: 'tabler:calendar-stats',
       },
       {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
+        title: '快速检索',
+        description: '当资料越来越多时，可以通过关键词、标签和对象关系快速找回过去的记录。',
+        icon: 'tabler:search',
       },
       {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
+        title: '持续复盘',
+        description: '投稿结果、退稿原因、返修经验和发表路径都能沉淀下来，成为下一次决策的依据。',
+        icon: 'tabler:history',
       },
     ]}
   >
@@ -313,65 +422,56 @@ const metadata = {
 
   <!-- HighlightedPosts Widget ******* -->
 
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro v6 + Tailwind CSS v4.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
+  <BlogLatestPosts title="使用说明与更新日志" linkText="查看全部" />
 
   <!-- FAQs Widget ******************* -->
 
   <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
+    id="faq"
+    title="常见问题"
+    tagline="FAQ"
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
-        title: 'Why AstroWind?',
+        title: 'Article-Tool 的更新与维护情况？',
         description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
+          '本软件由Lau Joe独立开发与维护，也是Lau Joe第一次独立开发并分发软件。它最初主要为个人自用而生，后续开放给有相似需求的用户使用。收费的初步目的，是尽量覆盖代码开发、授权服务与分发服务器等持续成本，开发者保证软件至少会更新到2028年7月。',
+        icon: 'tabler:help-circle',
       },
       {
-        title: 'What do I need to start?',
+        title: 'Article-Tool 适合谁使用？',
         description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
+          '适合需要长期管理期刊、论文稿件、投稿记录、发表成果、会议资料和基金项目的研究者，尤其适合不想把学术资料分散在多个表格和文件夹里的人。',
+        icon: 'tabler:help-circle',
       },
       {
-        title: 'How to install the Astro + Tailwind CSS template?',
+        title: '数据会不会必须上传到云端？',
         description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
+          '软件以本地化管理为核心，资料优先保存在自己的电脑中。涉及 AI 报告等扩展能力时，可以按软件说明配置相应服务。',
+        icon: 'tabler:cloud-off',
       },
       {
-        title: "What's something that you don't understand?",
+        title: '字段和分类能不能按自己的习惯调整？',
         description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
+          '可以。软件强调高度自定义，你可以根据自己的学科、投稿习惯和资料结构调整字段、标签、分类和记录方式。',
+        icon: 'tabler:adjustments-horizontal',
       },
       {
-        title: 'What is something that you would like to try again?',
+        title: '已经发表的论文为什么还要单独管理？',
         description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
+          '发表后的论文不只是成果列表。保留原稿快照、投稿过程、附件和复盘记录，可以帮助你回看一篇成果是如何从选题走到发表的。',
+        icon: 'tabler:archive',
       },
       {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
+        title: '当前价格和版本是什么？',
         description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
+          '软件能够免费使用，但是免费版仅用于轻量体验与确认工作流是否适合。需要长期整理、扩展字段和持续追踪投稿流程时，建议购买买断授权。用户购买后，不接受任何退款请求。用户付费后，请及时与开发者联系，加入售后群。当前软件版本为1.6.0，买断早鸟价格为 39.9 元。1.7.0 版本后买断价格计划恢复至 69.9 元。每个激活码能够支持2台设备使用，并且可自助解绑激活。',
+        icon: 'tabler:receipt',
       },
     ]}
   />
 
   <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
 
   <!-- CallToAction Widget *********** -->
 
@@ -379,20 +479,20 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
+        text: '下载软件',
+        href: 'https://pan.baidu.com/s/1JqpgmT9Wpub-Bl-Bhh27uQ?pwd=x44v',
         target: '_blank',
         icon: 'tabler:download',
       },
+      {
+        variant: 'secondary',
+        text: '回到功能介绍',
+        href: '#features',
+      },
     ]}
   >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
+    <Fragment slot="title">把学术资料管理，从零散变成连续</Fragment>
 
-    <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
-    </Fragment>
+    <Fragment slot="subtitle"> 从期刊筛选、稿件推进到发表归档，先用一个本地工作台把你的研究流程稳稳接住。 </Fragment>
   </CallToAction>
 </Layout>

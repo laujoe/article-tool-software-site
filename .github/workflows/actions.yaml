@@ -27,15 +27,8 @@ jobs:
           cache: npm
       - name: Configure GitHub Pages paths
         run: |
-          OWNER="${{ github.repository_owner }}"
-          REPO="${{ github.event.repository.name }}"
-          echo "SITE_URL=https://${OWNER}.github.io" >> "$GITHUB_ENV"
-
-          if [ "$REPO" = "${OWNER}.github.io" ]; then
-            echo "BASE_PATH=/" >> "$GITHUB_ENV"
-          else
-            echo "BASE_PATH=/${REPO}" >> "$GITHUB_ENV"
-          fi
+          echo "SITE_URL=https://articletool.laujoe.top" >> "$GITHUB_ENV"
+          echo "BASE_PATH=/" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
       - uses: actions/configure-pages@v5

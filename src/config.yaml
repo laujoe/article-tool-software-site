@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Article-Tool
+  site: 'https://articletool.laujoe.top'
   base: '/'
   trailingSlash: false
 
@@ -9,26 +9,26 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Article-Tool
+    template: '%s — Article-Tool'
+  description: 'Article-Tool 是本地优先的学术投稿与研究资料工作台，整合期刊库、稿件库、已刊论文库、日程、AI 报告、附件和备份能力。'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Article-Tool
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
+    handle: ''
+    site: ''
     cardType: summary_large_image
 
 i18n:
-  language: en
+  language: zh-CN
   textDirection: ltr
 
 apps:
