@@ -1,12 +1,12 @@
 {
   "product": "Article-Tool",
-  "version": "1.6",
-  "latestVersion": "1.6",
-  "title": "Article-Tool 1.6",
-  "releaseDate": "2026-07-10",
+  "version": "1.7.0",
+  "latestVersion": "1.7.0",
+  "title": "Article-Tool 1.7.0",
+  "releaseDate": "2026-07-12",
   "channelLabel": "下载版本",
-  "publicDownloadVersion": "1.6",
-  "notes": ["修复各种影响使用体验的BUG。", "在主菜单增加「基金项目」功能，支持新建基金项目。"],
+  "publicDownloadVersion": "1.7.0",
+  "notes": ["为基金项目增添立项人、参与人两种不同的项目逻辑。", "修复各种影响使用体验的BUG。"],
   "downloads": {
     "夸克网盘": "https://pan.quark.cn/s/c9cfea2cde63?pwd=G6sE",
     "百度网盘": "https://pan.baidu.com/s/1JqpgmT9Wpub-Bl-Bhh27uQ?pwd=x44v"
