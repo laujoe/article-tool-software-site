@@ -6,7 +6,11 @@
   "releaseDate": "2026-07-12",
   "channelLabel": "下载版本",
   "publicDownloadVersion": "1.7.0",
-  "notes": ["为基金项目增添立项人、参与人两种不同的项目逻辑。", "修复各种影响使用体验的BUG。"],
+  "notes": [
+    "为基金项目增添立项人、参与人两种不同的项目逻辑。",
+    "为学术会议增加「适配分析」功能。",
+    "修复各种影响使用体验的BUG。"
+  ],
   "downloads": {
     "夸克网盘": "https://pan.quark.cn/s/c9cfea2cde63?pwd=G6sE",
     "百度网盘": "https://pan.baidu.com/s/1JqpgmT9Wpub-Bl-Bhh27uQ?pwd=x44v"
