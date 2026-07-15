@@ -1,17 +1,12 @@
 {
   "product": "Article-Tool",
-  "version": "1.7.0",
-  "latestVersion": "1.7.0",
-  "title": "Article-Tool 1.7.0",
-  "releaseDate": "2026-07-12",
+  "version": "1.8.1",
+  "latestVersion": "1.8.1",
+  "title": "Article-Tool 1.8.1",
+  "releaseDate": "2026-07-14",
   "channelLabel": "下载版本",
-  "publicDownloadVersion": "1.7.0",
-  "notes": [
-    "为基金项目增添立项人、参与人两种不同的项目逻辑。",
-    "为学术会议增加适配分析功能。",
-    "增强期刊库的适配分析功能，使其更具针对性。",
-    "修复各种影响使用体验的BUG。"
-  ],
+  "publicDownloadVersion": "1.8.1",
+  "notes": ["暂时移除发行版的外部参考的部分网站。", "修复各种影响使用体验的BUG。"],
   "downloads": {
     "夸克网盘": "https://pan.quark.cn/s/c9cfea2cde63?pwd=G6sE",
     "百度网盘": "https://pan.baidu.com/s/1JqpgmT9Wpub-Bl-Bhh27uQ?pwd=x44v"
